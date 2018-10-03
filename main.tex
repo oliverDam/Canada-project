@@ -1,0 +1,120 @@
+%preamble - package inclusion and set up
+\input{setup/preamble.tex}
+
+%macros - please read this file
+\input{setup/macros.tex}
+
+\begin{document}       % TIP: If you are using TeXstudio you can open
+%\tableofcontents      %      the file by Ctrl+LeftClick on setup/macros.tex
+%\pagebreak             %      If the file doesn't exist, you will be asked
+					   %      weather or not you want to create it.
+%\begin{center}
+%	\vspace{5cm}
+%	\Huge{Worksheets}
+%\end{center}
+%\clearpage
+
+%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+%|||||||                 Example Inputs                  ||||||||
+%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+%|||||||                                                 ||||||||
+%			 \input{chapters/aFigureSample.tex}			 %|||||||
+%			 \input{chapters/bTableSample.tex} 		     %|||||||
+%			 \input{chapters/cEquationSample.tex}		 %|||||||
+%			 \input{chapters/dTikzSample.tex}            %|||||||
+%			 \input{chapters/eCodeSample.tex}            %|||||||
+%|||||||                                                 ||||||||
+%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+%%% Prereport %%%
+		\setlength\cftaftertoctitleskip{2pt}
+		\setlength\cftafterloftitleskip{6pt}
+		\setlength\cftafterlottitleskip{6pt}
+%\selectlanguage{danish}
+%\title{Testing the performance of linear regressors using inertial information combined with sEMG to minimize the limb position effect in proportional and simultaneous control of lower arm prosthetics.}
+
+%%% Frontmatter Settings %%%
+		\pagestyle{empty} %disable headers and footers
+		\pagenumbering{roman} %use roman page numbering in the frontmatter I II...
+%		\fancyfoot[RE,LO]{17gr7404} %page number on all pages
+%		\fancyfoot[LE,RO]{\thepage}
+%		\fancyhead[LE,LO,RE,RO]{}
+
+%%% Introductory Formalities %%%
+%\includepdf[pages={1}]{formalities/frontpage.pdf}
+			\input{formalities/frontpage.tex}			% <--- the frontpage
+%			\pagestyle{fancy}
+%%\include{formalities/kolofon}
+%			\input{formalities/titleSheet.tex} 			 % <--- the titlesheet - contains the synopsis!!
+%%%% Preface %%%
+%			\cleardoublepage
+%			\input{contents/bIntro/abstract.tex}			 % <--- this is the abstract!!
+%%\clearpage
+%			\input{formalities/forord.tex}				% <--- the preface
+%
+
+\clearpage
+			\pdfbookmark[0]{Table of Contents}{label: tableOfCentents}
+			\tableofcontents
+			\cleardoublepage
+
+
+%%% Mainmatter Settings %%%
+\pagenumbering{arabic} %use arabic page numbering in the mainmatter
+\fancyhf{}
+\fancyfoot[C]{\thepage} %\text{ of} \pageref{LastPage}			% ADD LABLE{LASTPAGE} TO LAST PAGE !!
+\fancyfoot[RE,LO]{18gr9406}																								   %
+\fancyhead[RE,LO]{}																												%% } consider fancyfoots
+\fancyhead[RE,LO]{\color{aaublue}\small\nouppercase\leftmark} %even page - chapter title %
+\pagestyle{fancy}
+
+
+%---------------------------INPUTS-------------------------------
+
+%\input{contents/statusText.tex}
+%\chapter{Introduction} \label{chap:Introduction}
+
+
+
+\chapter{Problem Analysis} \label{chap:PA}
+
+\input{contents/problemanalysis/aStroke.tex}
+\input{contents/problemanalysis/bSCI.tex}
+\input{contents/problemanalysis/Rehab.tex}
+\input{contents/problemanalysis/cAssessingGait.tex}
+
+
+%\chapter{Methods} \label{chap:Methods}
+
+
+%\chapter{Results} \label{chap:Results}
+
+
+%\chapter{Discussion} \label{chap:Discussion}
+
+
+%\chapter{Conclusion} \label{chap:Conclusion}
+
+
+
+
+\clearpage
+%\begin{multicols}{2}
+	
+\urlstyle{same}
+\printbibliography			% to bibliography: "compile" -> Tools -> Commands -> "Bibtex" -> "compile/build"
+\clearpage
+%\end{multicols}
+
+
+%\cleardoublepage
+% BILAG
+%\begin{appendices}
+%	\chapter{Appendices}
+%
+%\end{appendices}
+
+
+\end{document}
