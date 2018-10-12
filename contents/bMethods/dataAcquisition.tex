@@ -1,4 +1,19 @@
 %the shimmer device
 \section{Data Acquisition}
 
-For this project data will be acquired using the Shimmer3 device from ShimmerSensing. The Shimmer3 device is a 9 degree of freedom (DoF) Inertial Measurement Unit (IMU) possessing 5 different types of sensors; accelerometer, gyroscope, magnetometer and altimeter. 
+For this project reaction and pressure forces is collected from subjects performing the karate kata Pinan Nidan. Reaction forces are measured from the subjects body rotations and movements, while pressure forces are measured from under the subjects feet. 
+
+Data will be acquired using accelerometers and force sensors. The accelerometer is provided through the use of the Shimmer3 device from ShimmerSensing. Force sensors are/might be from Interlink. Data will be collected using MATLAB. 
+
+The Shimmer3 device is a nine degree of freedom (DoF) Inertial Measurement Unit (IMU) possessing five different types of sensors; accelerometer, gyroscope, magnetometer and altimeter. The Shimmer3 is capable of being configured to enable or disable specific sensors depending on which is needed. For this project only the accelerometer module of the device will be used. The accelerometer in the Shimmer3 device is a LSM303DLHC. It has a three dimensional digital linear acceleration sensor with a range of \pm2g / \pm4g / \pm8g / \pm16g. \cite{LSM303DLHC} %It has 16bit data output and communicates through an I$^{2}$C serial interface. 
+Communication between the Shimmer3 devices and the computer is through Bluetooth. The computer will be running MATLAB and the \textit{Shimmer MATLAB Instrument Driver Library} to collect the streamed data from the Shimmer3 device. 
+
+The force sensors used in this project in from ??? (maybe Interlink). A total of four sensors will be used under each foot, with one "SquareSensor3000" placed under the heel and three "PennyCircle420" sensors placed under the front of the foot, under the 
+
+Pressure force sensor will be placed in the soles of shoes. Subjects will be instructed to wear these shoes during execution of Pinan Nidan. 
+
+
+
+
+(https://www.digikey.ca/product-detail/en/interlink-electronics/30-73258/1027-1002-ND/2476470) big square sensor
+(https://www.digikey.ca/product-detail/en/interlink-electronics/30-81794/1027-1001-ND/2476468) small round sensor
