@@ -47,21 +47,21 @@ if (shimmer1.connect && shimmer2.connect && shimmer3.connect)               % TR
     % Define settings for shimmer1
     shimmer1.setinternalboard('None');                                     % Set the shimmer 1 internal daughter board to 'None'
     shimmer1.disableallsensors;                                             % disable all sensors
-    shimmer1.setenabledsensors(SensorMacros.ACCEL,1);                      % Enable the shimmer 1 accelerometer
+    shimmer1.setenabledsensors(SensorMacros.GYRO,1);                      % Enable the shimmer 1 accelerometer
     shimmer1.setaccelrange(0);                                             % Set accelerometer range
     shimmer1.setsamplingrate(51.2);                                        % Set the shimmer 1 sampling rate to 51.2Hz
     
     % Define settings for shimmer2
     shimmer2.setinternalboard('None');                                     % Set the shimmer 2 internal daughter board to 'None'
     shimmer2.disableallsensors;                                             % disable all sensors
-    shimmer2.setenabledsensors(SensorMacros.ACCEL,1);                      % Enable the shimmer 2 accelerometer 
+    shimmer2.setenabledsensors(SensorMacros.GYRO,1);                      % Enable the shimmer 2 accelerometer 
     shimmer2.setaccelrange(0);                                             % Set accelerometer range
     shimmer2.setsamplingrate(51.2);                                        % Set the shimmer 2 sampling rate to 51.2Hz
     
     % Define settings for shimmer3
     shimmer3.setinternalboard('None');                                     % Set the shimmer 2 internal daughter board to 'None'
     shimmer3.disableallsensors;                                             % disable all sensors
-    shimmer3.setenabledsensors(SensorMacros.ACCEL,1);                      % Enable the shimmer 2 accelerometer 
+    shimmer3.setenabledsensors(SensorMacros.GYRO,1);                      % Enable the shimmer 2 accelerometer 
     shimmer3.setaccelrange(0);                                             % Set accelerometer range
     shimmer3.setsamplingrate(51.2);
     
@@ -100,9 +100,9 @@ if (shimmer1.connect && shimmer2.connect && shimmer3.connect)               % TR
            
             if (isempty(uncalibDataShimmer1)~=1)
                 if (shimmer1.ShimmerVersion == 3)                              % get signal indices for Shimmer3
-                    chIndex(1) = find(ismember(signalName, 'Low Noise Accelerometer X'));
-                    chIndex(2) = find(ismember(signalName, 'Low Noise Accelerometer Y'));
-                    chIndex(3) = find(ismember(signalName, 'Low Noise Accelerometer Z'));
+                    chIndex(1) = find(ismember(signalName, 'Gyroscope X'));
+                    chIndex(2) = find(ismember(signalName, 'Gyroscope Y'));
+                    chIndex(3) = find(ismember(signalName, 'Gyroscope Z'));
                 elseif (shimmer1.ShimmerVersion < 3)                           % get signal indices for Shimmer2/2r
                     chIndex(1) = find(ismember(signalName, 'Accelerometer X'));
                     chIndex(2) = find(ismember(signalName, 'Accelerometer Y'));
@@ -135,9 +135,9 @@ if (shimmer1.connect && shimmer2.connect && shimmer3.connect)               % TR
                     
             if (isempty(uncalibDataShimmer2)~=1)
                 if (shimmer2.ShimmerVersion == 3)                              % get signal indices for Shimmer3
-                    chIndex2(1) = find(ismember(signalName, 'Low Noise Accelerometer X'));
-                    chIndex2(2) = find(ismember(signalName, 'Low Noise Accelerometer Y'));
-                    chIndex2(3) = find(ismember(signalName, 'Low Noise Accelerometer Z'));
+                    chIndex2(1) = find(ismember(signalName, 'Gyroscope X'));
+                    chIndex2(2) = find(ismember(signalName, 'Gyroscope Y'));
+                    chIndex2(3) = find(ismember(signalName, 'Gyroscope Z'));
                 elseif (shimmer2.ShimmerVersion < 3)                           % get indices for Shimmer2/2r
                     chIndex2(1) = find(ismember(signalName, 'Accelerometer X'));
                     chIndex2(2) = find(ismember(signalName, 'Accelerometer Y'));
@@ -168,9 +168,9 @@ if (shimmer1.connect && shimmer2.connect && shimmer3.connect)               % TR
            
             if (isempty(uncalibDataShimmer3)~=1)
                 if (shimmer3.ShimmerVersion == 3)                              % get signal indices for Shimmer3
-                    chIndex(1) = find(ismember(signalName, 'Low Noise Accelerometer X'));
-                    chIndex(2) = find(ismember(signalName, 'Low Noise Accelerometer Y'));
-                    chIndex(3) = find(ismember(signalName, 'Low Noise Accelerometer Z'));
+                    chIndex(1) = find(ismember(signalName, 'Gyroscope X'));
+                    chIndex(2) = find(ismember(signalName, 'Gyroscope Y'));
+                    chIndex(3) = find(ismember(signalName, 'Gyroscope Z'));
                 elseif (shimmer3.ShimmerVersion < 3)                           % get signal indices for Shimmer2/2r
                     chIndex(1) = find(ismember(signalName, 'Accelerometer X'));
                     chIndex(2) = find(ismember(signalName, 'Accelerometer Y'));
