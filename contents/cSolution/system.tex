@@ -1,0 +1,19 @@
+\section{System or whatever you want to call it}
+
+This section describes some of the stuff we've done, and the rest of the stuff is secret, so mind your own business.
+
+\subsection{Algorithms}
+
+The algorithms behind the system are designed to separate active movements of the Kata from standstill, as well as estimating the body sway and weight distribution during standstill. It is also capable of determining the sequence of the movement, meaning that it describes the timing and speed of the movements performed during the Kata. 
+
+\subsubsection{Separating movement and standstill}
+
+The algorithm implemented to separate the two different states during the kata is designed to work on the gyroscope data. The primary function of the algorithm is to examine whether the current state of rotation is higher than a certain threshold based on the mean of the entire sequence \textbf{(Should be more specific later)}. In case the algorithm detects a rotation higher than the threshold, it fills out a matrix with 1 representing potential movement and 0 if a standstill is detected. 
+
+To ensure that noise and narrow peaks are not detected as movement the algorithm only classifies movements when the surrounding 25 samples are at least \textbf{uncertain percentage \%} positive. Additionally the movement can only be classified when two of the three gyroscopes are being moved at a rate qualifying as moving state.
+
+\subsubsection{Weight distribution}
+
+\subsubsection{Quantifying body sway}
+
+\subsubsection{Sequence of movement}
