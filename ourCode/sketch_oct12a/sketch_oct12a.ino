@@ -1,12 +1,14 @@
 //Reading stuff:
-int ForcePin = A0;
-int ForcePin2 = A1;
-int ForcePin3 = A2;
-int ForcePin4 = A3;
-int ForceReading = 0;
-int ForceReading2 = 0;
-int ForceReading3 = 0;
-int ForceReading4 = 0;
+int forcePin = A0;
+int forcePin2 = A1;
+int forcePin3 = A2;
+int forcePin4 = A3;
+int forceReading = 0;
+int forceReading2 = 0;
+int forceReading3 = 0;
+int forceReading4 = 0;
+static unsigned long lastRead = 0;
+const unsigned long READ_PERIOD = 10000;
 
 /*--------------------------------------------------------------------*/
 
@@ -24,8 +26,37 @@ unsigned long debounceDelay = 500;
 /*--------------------------------------------------------------------*/
 
 //SD-card stuff:
-//#include <SPI.h>
-//#include <SD.h>
+#include <SPI.h>
+#include <SD.h>
+
+File dataFile;
+
+const int chipSelect = 4;
+String S1, S2, S3, S4, T1, string2write;
+
+//Sends the string:
+void writeToSD(int sens1, int sens2, int sens3, int sens4) {
+  S1 = String(sens1);
+  S2 = String(sens2);
+  S3 = String(sens3);
+  S4 = String(sens4);
+  T1 = String(millis());
+  string2write = T1 + ";" + S1 + ";" + S2 + ";" + S3 + ";" + S4;
+  File dataFile = SD.open("data.txt", FILE_WRITE);
+  dataFile.println(string2write);
+  dataFile.close();
+}
+
+//Collects a string before sending it:
+/*String buildString(int sens1, int sens2, int sens3, int sens4) {
+  S1 = String(sens1);
+  S2 = String(sens2);
+  S3 = String(sens3);
+  S4 = String(sens4);
+  T1 = String(millis());
+  string2write = T1 + ";" + S1 + ";" + S2 + ";" + S3 + ";" + S4 + "\r\n";
+  return string2write;
+}*/
 
 /*--------------------------------------------------------------------*/
 
@@ -39,9 +70,18 @@ void setup() {
   digitalWrite(ledPin, ledState);
 
   //SD-card stuff:
-  //SD.begin(4);
-  //dataFile = SD.open("data.txt", FILE_WRITE);
-  //dataFile.print("RF - RB - LF - LB");
+  // see if the card is present and can be initialized:
+  if (!SD.begin(chipSelect)) {
+    Serial.println("Card failed, or not present");
+    // don't do anything more:
+    while (1);
+  }
+  Serial.println("card initialized.");
+
+  //Create data file:
+  dataFile = SD.open("data.txt", FILE_WRITE);
+  dataFile.println("");
+  dataFile.close();
 }
 
 void loop() {
@@ -54,11 +94,11 @@ void loop() {
     lastDebounceTime = millis();
   }
   //check the difference between current time and last registered button press time, if it's greater than user defined delay then change the LED state as it's not a bounce
-  if ((millis()-lastDebounceTime) > debounceDelay) {
+  if ((millis() - lastDebounceTime) > debounceDelay) {
     if (reading != buttonState) {
       buttonState = reading;
-    if (buttonState == HIGH) {
-      ledState = !ledState;
+      if (buttonState == HIGH) {
+        ledState = !ledState;
       }
     }
   }
@@ -68,36 +108,25 @@ void loop() {
   //save the reading. next time through the loop the state of the reading will be known as the lastButtonState
   lastButtonState = reading;
 
-/*--------------------------------------------------------------------*/
+  /*--------------------------------------------------------------------*/
 
   //Reading-stuff:
-  if (ledState == HIGH) {
-    ForceReading = analogRead(ForcePin);
-    delay(10);
-    ForceReading = analogRead(ForcePin);
-    Serial.print("Sensor 1: ");
-    Serial.println(ForceReading);
-    //dataFile.print(ForceReading);
-    //dataFile.print(" ~ ");
-    ForceReading2 = analogRead(ForcePin2);
-    delay(10);
-    ForceReading2 = analogRead(ForcePin2);
-    Serial.print("Sensor 2: ");
-    Serial.println(ForceReading2);
-    //dataFile.println(ForceReading2);
-    ForceReading3 = analogRead(ForcePin3);
-    delay(10);
-    ForceReading3 = analogRead(ForcePin3);
-    Serial.print("Sensor 3: ");
-    Serial.println(ForceReading3);
-    ForceReading4 = analogRead(ForcePin4);
-    delay(10);
-    ForceReading4 = analogRead(ForcePin4);
-    Serial.print("Sensor 4: ");
-    Serial.println(ForceReading4);
-    delay(1500);
-  }
+  if (ledState == HIGH && micros() - lastRead >= READ_PERIOD) {
+    forceReading = analogRead(forcePin);
+    forceReading2 = analogRead(forcePin2);
+    forceReading3 = analogRead(forcePin3);
+    forceReading4 = analogRead(forcePin4);
+    lastRead += READ_PERIOD;
 
-    // ADD STUFF FOR SD-CARD closure https://randomnerdtutorials.com/guide-to-sd-card-module-with-arduino/
+    /*if (lastSend == 10) {
+      writeToSD(string2write);
+      string2write = "";
+    } else {
+      
+    }*/
+    
+    //Saving stuff:
+    writeToSD(forceReading, forceReading2, forceReading3, forceReading4);
+  }
     
 }
