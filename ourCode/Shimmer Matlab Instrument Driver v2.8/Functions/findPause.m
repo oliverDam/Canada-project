@@ -1,4 +1,4 @@
-function findPause(legFile,chestFile,headFile)
+function [movement] = findPause(legFile,chestFile)%,headFile)
 
 %% This takes input from 3 different sensors and splits it up into acitve
 %  and passive segments. The input should be in the form of three strings
@@ -10,17 +10,17 @@ timeLeg = getTime(A.data(:,1));
 A = importdata(chestFile);
 chestData = A.data(:,2:4);
 timeChest = getTime(A.data(:,1));
-A = importdata(headFile);
-headData = A.data(:,2:4);
-timeHead = getTime(A.data(:,1));
+% A = importdata(headFile);
+% headData = A.data(:,2:4);
+% timeHead = getTime(A.data(:,1));
 
 legData = normalizeData(legData);
 chestData = normalizeData(chestData);
-headData = normalizeData(headData);
+%headData = normalizeData(headData);
 
 [~,moveLeg] = getThreshold(legData,[20,0.8]);
 [~,moveChest] = getThreshold(chestData,[25,0.9]);
-[~,moveHead] = getThreshold(headData,[15,0.9]);
+%[~,moveHead] = getThreshold(headData,[15,0.9]);
 
 figure;
 subplot(2,2,1)

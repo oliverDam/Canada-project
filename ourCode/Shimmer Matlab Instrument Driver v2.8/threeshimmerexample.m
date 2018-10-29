@@ -49,21 +49,21 @@ if (shimmer1.connect && shimmer2.connect && shimmer3.connect)               % TR
     shimmer1.disableallsensors;                                             % disable all sensors
     shimmer1.setenabledsensors(SensorMacros.GYRO,1);                      % Enable the shimmer 1 accelerometer
     shimmer1.setaccelrange(0);                                             % Set accelerometer range
-    shimmer1.setsamplingrate(51.2);                                        % Set the shimmer 1 sampling rate to 51.2Hz
+    shimmer1.setsamplingrate(100);                                        % Set the shimmer 1 sampling rate to 51.2Hz
     
     % Define settings for shimmer2
     shimmer2.setinternalboard('None');                                     % Set the shimmer 2 internal daughter board to 'None'
     shimmer2.disableallsensors;                                             % disable all sensors
     shimmer2.setenabledsensors(SensorMacros.GYRO,1);                      % Enable the shimmer 2 accelerometer 
     shimmer2.setaccelrange(0);                                             % Set accelerometer range
-    shimmer2.setsamplingrate(51.2);                                        % Set the shimmer 2 sampling rate to 51.2Hz
+    shimmer2.setsamplingrate(100);                                        % Set the shimmer 2 sampling rate to 51.2Hz
     
     % Define settings for shimmer3
     shimmer3.setinternalboard('None');                                     % Set the shimmer 2 internal daughter board to 'None'
     shimmer3.disableallsensors;                                             % disable all sensors
     shimmer3.setenabledsensors(SensorMacros.GYRO,1);                      % Enable the shimmer 2 accelerometer 
     shimmer3.setaccelrange(0);                                             % Set accelerometer range
-    shimmer3.setsamplingrate(51.2);
+    shimmer3.setsamplingrate(100);
     
     if (shimmer1.start && shimmer2.start && shimmer3.start)                % TRUE if both shimmers start streaming
         
