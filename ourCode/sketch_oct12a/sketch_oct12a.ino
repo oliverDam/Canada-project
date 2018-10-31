@@ -33,6 +33,7 @@ File dataFile;
 
 const int chipSelect = 4;
 String S1, S2, S3, S4, T1, string2write;
+int closeStuff = 0;
 
 //Sends the string:
 void writeToSD(int sens1, int sens2, int sens3, int sens4) {
@@ -42,9 +43,9 @@ void writeToSD(int sens1, int sens2, int sens3, int sens4) {
   S4 = String(sens4);
   T1 = String(millis());
   string2write = T1 + ";" + S1 + ";" + S2 + ";" + S3 + ";" + S4;
-  File dataFile = SD.open("data.txt", FILE_WRITE);
+  //File dataFile = SD.open("data.txt", FILE_WRITE);
   dataFile.println(string2write);
-  dataFile.close();
+  //dataFile.close();
 }
 
 //Collects a string before sending it:
@@ -81,7 +82,6 @@ void setup() {
   //Create data file:
   dataFile = SD.open("data.txt", FILE_WRITE);
   dataFile.println("");
-  dataFile.close();
 }
 
 void loop() {
@@ -112,11 +112,19 @@ void loop() {
 
   //Reading-stuff:
   if (ledState == HIGH && micros() - lastRead >= READ_PERIOD) {
+    if (!dataFile) {
+      dataFile = SD.open("data.txt", FILE_WRITE);
+    }
     forceReading = analogRead(forcePin);
     forceReading2 = analogRead(forcePin2);
     forceReading3 = analogRead(forcePin3);
     forceReading4 = analogRead(forcePin4);
-    lastRead += READ_PERIOD;
+
+    if closeStuff == 0 {
+      lastRead = millis();
+    } else {
+      lastRead += READ_PERIOD;
+    }
 
     /*if (lastSend == 10) {
       writeToSD(string2write);
@@ -127,6 +135,13 @@ void loop() {
     
     //Saving stuff:
     writeToSD(forceReading, forceReading2, forceReading3, forceReading4);
+
+    closeStuff = 1;
+  }
+
+  if (closeStuff == 1 && ledState == LOW) {
+    dataFile.close();
+    closeStuff = 0;
   }
     
 }

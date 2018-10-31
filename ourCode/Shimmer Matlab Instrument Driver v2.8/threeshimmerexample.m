@@ -1,4 +1,4 @@
-function threeshimmerexample(comPort1, comPort2, comPort3, fileName1, fileName2, fileName3, captureDuration)
+function threeshimmerexample(comPort1, comPort2, fileName1, fileName2, captureDuration) %comPort3, fileName1, fileName2, fileName3, captureDuration)
 
 %TWOSHIMMEREXAMPLE - Demonstrate basic features of ShimmerHandleClass
 %
@@ -30,7 +30,7 @@ NO_SAMPLES_IN_PLOT = 500;                                                  % Num
 DELAY_PERIOD = 0.2;                                                        % A delay period of time in seconds between data read operations
 firsttime1 = true;
 firsttime2 = true;
-firsttime3 = true;
+%firsttime3 = true;
 
 addpath('./Resources/') 
 
@@ -38,11 +38,11 @@ addpath('./Resources/')
 
 shimmer1 = ShimmerHandleClass(comPort1);                                   % Define shimmer1 as a ShimmerHandle Class instance with comPort1
 shimmer2 = ShimmerHandleClass(comPort2);                                   % Define shimmer2 as a ShimmerHandle Class instance with comPort2
-shimmer3 = ShimmerHandleClass(comPort3);
+%shimmer3 = ShimmerHandleClass(comPort3);
 SensorMacros = SetEnabledSensorsMacrosClass;                               % assign user friendly macros for setenabledsensors
 
 
-if (shimmer1.connect && shimmer2.connect && shimmer3.connect)               % TRUE if both shimmer 1 and shimmer 2 connect
+if (shimmer1.connect && shimmer2.connect)% && shimmer3.connect)               % TRUE if both shimmer 1 and shimmer 2 connect
     
     % Define settings for shimmer1
     shimmer1.setinternalboard('None');                                     % Set the shimmer 1 internal daughter board to 'None'
@@ -59,21 +59,21 @@ if (shimmer1.connect && shimmer2.connect && shimmer3.connect)               % TR
     shimmer2.setsamplingrate(100);                                        % Set the shimmer 2 sampling rate to 51.2Hz
     
     % Define settings for shimmer3
-    shimmer3.setinternalboard('None');                                     % Set the shimmer 2 internal daughter board to 'None'
-    shimmer3.disableallsensors;                                             % disable all sensors
-    shimmer3.setenabledsensors(SensorMacros.GYRO,1);                      % Enable the shimmer 2 accelerometer 
-    shimmer3.setaccelrange(0);                                             % Set accelerometer range
-    shimmer3.setsamplingrate(100);
+%     shimmer3.setinternalboard('None');                                     % Set the shimmer 2 internal daughter board to 'None'
+%     shimmer3.disableallsensors;                                             % disable all sensors
+%     shimmer3.setenabledsensors(SensorMacros.GYRO,1);                      % Enable the shimmer 2 accelerometer 
+%     shimmer3.setaccelrange(0);                                             % Set accelerometer range
+%     shimmer3.setsamplingrate(100);
     
-    if (shimmer1.start && shimmer2.start && shimmer3.start)                % TRUE if both shimmers start streaming
+    if (shimmer1.start && shimmer2.start)% && shimmer3.start)                % TRUE if both shimmers start streaming
         
         uncalibDataShimmer1 = []; 
         uncalibDataShimmer2 = [];
-        uncalibDataShimmer3 = [];
+        %uncalibDataShimmer3 = [];
         
         h.figure1=figure('Name','Shimmer 1');                              % Create a handle to figure for plotting data from shimmer1
         h.figure2=figure('Name','Shimmer 2');                              % Create a handle to figure for plotting data from shimmer2
-        h.figure3=figure('Name','Shimmer 3');
+        %h.figure3=figure('Name','Shimmer 3');
         
         elapsedTime = 0;                                                   % Reset to 0
         
@@ -152,38 +152,38 @@ if (shimmer1.connect && shimmer2.connect && shimmer3.connect)               % TR
             end      
             
             % Read and plot data for shimmer3
-            [uncalibratedData,signalName,signalFormat,signalUnit]=shimmer3.getdata('u');
-            uncalibDataShimmer3 = [uncalibDataShimmer3; uncalibratedData];    % Read the uncalibrated data for shimmer1 and add to previous data
+            %[uncalibratedData,signalName,signalFormat,signalUnit]=shimmer3.getdata('u');
+            %uncalibDataShimmer3 = [uncalibDataShimmer3; uncalibratedData];    % Read the uncalibrated data for shimmer1 and add to previous data
               
             % Part of saving - 5 lines:
-            if (firsttime3==true && isempty(uncalibratedData)~=1)
-                firsttime3 = writeHeadersToFile(fileName3,signalName,signalFormat,signalUnit);
-            else
-                dlmwrite(fileName3, uncalibratedData, '-append', 'delimiter', '\t','precision',16);
-            end
+            %if (firsttime3==true && isempty(uncalibratedData)~=1)
+            %    firsttime3 = writeHeadersToFile(fileName3,signalName,signalFormat,signalUnit);
+            %else
+            %    dlmwrite(fileName3, uncalibratedData, '-append', 'delimiter', '\t','precision',16);
+            %end
             
-            if(length(uncalibDataShimmer3) > NO_SAMPLES_IN_PLOT)                 
-               uncalibDataShimmer3=uncalibDataShimmer3((length(uncalibDataShimmer3) - NO_SAMPLES_IN_PLOT):end, :);   % Trim excess previous data from array for plotting purposes
-            end
+            %if(length(uncalibDataShimmer3) > NO_SAMPLES_IN_PLOT)                 
+            %   uncalibDataShimmer3=uncalibDataShimmer3((length(uncalibDataShimmer3) - NO_SAMPLES_IN_PLOT):end, :);   % Trim excess previous data from array for plotting purposes
+            %end
            
-            if (isempty(uncalibDataShimmer3)~=1)
-                if (shimmer3.ShimmerVersion == 3)                              % get signal indices for Shimmer3
-                    chIndex(1) = find(ismember(signalName, 'Gyroscope X'));
-                    chIndex(2) = find(ismember(signalName, 'Gyroscope Y'));
-                    chIndex(3) = find(ismember(signalName, 'Gyroscope Z'));
-                elseif (shimmer3.ShimmerVersion < 3)                           % get signal indices for Shimmer2/2r
-                    chIndex(1) = find(ismember(signalName, 'Accelerometer X'));
-                    chIndex(2) = find(ismember(signalName, 'Accelerometer Y'));
-                    chIndex(3) = find(ismember(signalName, 'Accelerometer Z'));
-                end
-                accelDataShimmer3 = [uncalibDataShimmer3(:,chIndex(1)), uncalibDataShimmer3(:,chIndex(2)), uncalibDataShimmer3(:,chIndex(3))]; % Extract only the columns of accelerometer data
-                set(0,'CurrentFigure',h.figure3);           
-                plot(accelDataShimmer3);                                       % Plot the accelerometer data
-                title('Shimmer 1 Accelerometer Data');                         % Add title to the plot
-                axis([0 NO_SAMPLES_IN_PLOT 0 4095]);                           % Define min and max values for axis , Shimmer 3 has an int16 for the digital accel so users can change accordingly
-                legend(char(signalName{chIndex(1)}),char(signalName{chIndex(2)}),char(signalName{chIndex(3)}))                          % Add legend to plot
+            %if (isempty(uncalibDataShimmer3)~=1)
+            %    if (shimmer3.ShimmerVersion == 3)                              % get signal indices for Shimmer3
+            %        chIndex(1) = find(ismember(signalName, 'Gyroscope X'));
+            %        chIndex(2) = find(ismember(signalName, 'Gyroscope Y'));
+            %        chIndex(3) = find(ismember(signalName, 'Gyroscope Z'));
+            %    elseif (shimmer3.ShimmerVersion < 3)                           % get signal indices for Shimmer2/2r
+            %        chIndex(1) = find(ismember(signalName, 'Accelerometer X'));
+            %        chIndex(2) = find(ismember(signalName, 'Accelerometer Y'));
+            %        chIndex(3) = find(ismember(signalName, 'Accelerometer Z'));
+            %    end
+            %    accelDataShimmer3 = [uncalibDataShimmer3(:,chIndex(1)), uncalibDataShimmer3(:,chIndex(2)), uncalibDataShimmer3(:,chIndex(3))]; % Extract only the columns of accelerometer data
+            %    set(0,'CurrentFigure',h.figure3);           
+            %    plot(accelDataShimmer3);                                       % Plot the accelerometer data
+            %    title('Shimmer 1 Accelerometer Data');                         % Add title to the plot
+            %    axis([0 NO_SAMPLES_IN_PLOT 0 4095]);                           % Define min and max values for axis , Shimmer 3 has an int16 for the digital accel so users can change accordingly
+            %    legend(char(signalName{chIndex(1)}),char(signalName{chIndex(2)}),char(signalName{chIndex(3)}))                          % Add legend to plot
 
-            end
+            %end
             
             elapsedTime = elapsedTime + toc;                               % Stop timer and add to elapsed time
             tic;                                                           % Start timer
@@ -194,19 +194,19 @@ if (shimmer1.connect && shimmer2.connect && shimmer3.connect)               % TR
         
         shimmer1.stop;                                                     % Stop data streaming from shimmer1                                                    
         shimmer2.stop;                                                     % Stop data streaming from shimmer2
-        shimmer3.stop;
+        %shimmer3.stop;
         
     else
         
         shimmer1.stop;                                                     % Stop data streaming from shimmer1 (if it has started streaming)                                                
         shimmer2.stop;                                                     % Stop data streaming from shimmer2 (if it has started streaming)  
-        shimmer3.stop;
+        %shimmer3.stop;
         
     end            
     
     shimmer1.disconnect;                                                   % Disconnect from shimmer1
     shimmer2.disconnect;                                                   % Disconnect from shimmer2    
-    shimmer3.disconnect;
+    %shimmer3.disconnect;
     
 end
 
