@@ -61,7 +61,7 @@ else
     L = length(moveChest)-1;
 end
 
-[~,movement] = getThreshold([moveLeg(1:L),moveLeg(1:L),moveChest(1:L)],[15,0.5]);
+[~,movement] = getThreshold([moveLeg(1:L),moveLeg(1:L),moveChest(1:L)],[30,0.3]);
 %[~,movement] = getThreshold([moveLeg(1:4300),moveHead(1:4300),moveChest(1:4300)],[15,0.5]);
 
 subplot(2,2,4)
