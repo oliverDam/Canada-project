@@ -13,6 +13,8 @@ xthres = mean(dataInput(:,1));
 ythres = mean(dataInput(:,2));
 zthres = mean(dataInput(:,3));
 
+
+% If gyroscope data is lower than threshold -> no movement
 for i=1:length(dataInput)
     if xthres >= dataInput(i,1) && ythres >= dataInput(i,2) && zthres ...
             >= dataInput(i,3)
@@ -22,6 +24,10 @@ for i=1:length(dataInput)
     end
 end
 
+% Checks to see if the surrounding recordings also correspond to a movement
+% and compares the average value to a previously defined threshold. Sens(2)
+% defines the percentage of movements within the sens(1) area that has to
+% be a movement.
 for i=sens(1)+1:length(moveMatrix)-sens(1)
     if mean(moveMatrix(i-sens(1):i+sens(1))) >= sens(2)
         moveMatrixCorrected = [moveMatrixCorrected; 1];

@@ -1,22 +1,15 @@
 function [movement] = findPause(legData,chestData)%,headFile)
 
-%% This takes input from 3 different sensors and splits it up into acitve
-%  and passive segments. The input should be in the form of three strings
-%  containing the names of the data files with accelerometer data.
+%% This takes input from 2 different sensors and splits it up into acitve
+%  and passive segments. The input should be in the form of two matrices
+%  containing the accelerometer data.
 
-%A = importdata(legFile);
-%legData = A.data(:,2:4);
 time = (0:1:length(legData)-1)/100;
-timeLeg = time;%(1:length(legData));
-%A = importdata(chestFile);
-%chestData = A.data(:,2:4);
-timeChest = time;%(1:length(chestData));
-% A = importdata(headFile);
-% headData = A.data(:,2:4);
-% timeHead = getTime(A.data(:,1));
+timeLeg = time;
+timeChest = time;
 
-legData = normalizeData(legData);
-chestData = normalizeData(chestData);
+legData = normalizeData(legData,'mean');
+chestData = normalizeData(chestData,'mean');
 %headData = normalizeData(headData);
 
 [~,moveLeg] = getThreshold(legData,[15,0.8]);
