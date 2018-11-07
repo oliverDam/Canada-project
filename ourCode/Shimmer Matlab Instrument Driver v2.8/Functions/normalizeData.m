@@ -15,7 +15,7 @@ catch
     four = 0;
 end
 
-if mode == 'mean'
+if mode == 'mea'
     outx = datax-mean(datax);
     outy = datay-mean(datay);
     outz = dataz-mean(dataz);

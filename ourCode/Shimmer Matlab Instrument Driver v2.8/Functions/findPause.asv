@@ -1,4 +1,4 @@
-function [movement] = findPause(legData,chestData,press)%,headFile)
+function [movement] = findPause(legData,chestData)%,headFile)
 
 %% This takes input from 2 different sensors and splits it up into acitve
 %  and passive segments. The input should be in the form of two matrices
@@ -12,8 +12,8 @@ legData = normalizeData(legData,'mea');
 chestData = normalizeData(chestData,'mea');
 %headData = normalizeData(headData);
 
-[~,moveLeg] = getThreshold2(legData,press,[30,0.4,0.9]);
-[~,moveChest] = getThreshold2(chestData,press,[30,0.4,0.9]);
+[~,moveLeg] = getThreshold(legData,[15,0.7]);
+[~,moveChest] = getThreshold(chestData,[15,0.9]);
 %[~,moveHead] = getThreshold(headData,[15,0.9]);
 
 figure;
@@ -58,8 +58,7 @@ end
 %[~,movement] = getThreshold([moveLeg(1:4300),moveHead(1:4300),moveChest(1:4300)],[15,0.5]);
 
 subplot(2,2,4)
-plot(timeLeg(1:L),movement*max(legData(:,1)));
+plot(timeLeg(1:L),movement);
 hold on;
-plot(timeLeg(1:L),legData(1:L,1));
-axis([0 timeLeg(end)+10 -0.05 max(legData(:,1))*1.1]);
+axis([0 timeLeg(end)+10 -0.05 1.05]);
 title('Suspected movement times');
