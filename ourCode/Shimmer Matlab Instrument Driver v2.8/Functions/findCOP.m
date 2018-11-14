@@ -16,15 +16,15 @@ p=pressure;
 for i = 1:length(movement)
     
     
-    for k = 1:4
+    for k = 1:6
         p(i,k) = p(i,k)/sum(p(i,:));
     end
     
-    COP(i,1) = sum(p(i,1:2))-sum(p(i,3:4));
+    COP(i,1) = sum(p(i,1:3))-sum(p(i,4:6));
     
     %If we don't have movement the Y-direction depends on both feet:
     %if movement == 0
-        COP(i,2) = sum(p(i,[1 3]))-sum(p(i,[2 4]));
+        COP(i,2) = sum(p(i,[1 4]))-sum(p(i,[2:3 5:6]));
     %else %Else it is calculated based on the y-load on a single foot:
     %    if sum(p(i,1:2)) >= sum(p(i,3:4))
     %        COP(i,2) = (p(i,1)-p(i,2))/sum(p(i,1:2));

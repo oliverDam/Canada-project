@@ -10,29 +10,35 @@ datay = dataInput(:,2);
 dataz = dataInput(:,3);
 try
     dataj = dataInput(:,4);
-    four = 1;
+    datak = dataInput(:,5);
+    datap = dataInput(:,6);
+    six = 1;
 catch
-    four = 0;
+    six = 0;
 end
 
 if mode == 'mea'
     outx = datax-mean(datax);
     outy = datay-mean(datay);
     outz = dataz-mean(dataz);
-    if four == 1
+    if six == 1
         outj = dataj-mean(dataj);
+        outk = datak-mean(datak);
+        outp = datap-mean(datap);
     end
 elseif mode == 'max'
     outx = datax-max(datax);
     outy = datay-max(datay);
     outz = dataz-max(dataz);
-    if four == 1
+    if six == 1
         outj = dataj-max(dataj);
+        outk = datak-max(datak);
+        outp = datap-max(datap);
     end
 end
 
-if four == 0
+if six == 0
     output = [abs(outx),abs(outy),abs(outz)];
 else 
-    output = [abs(outx),abs(outy),abs(outz),abs(outj)];
+    output = [abs(outx),abs(outy),abs(outz),abs(outj),abs(outk),abs(outp)];
 end

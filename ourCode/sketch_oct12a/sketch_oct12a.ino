@@ -3,10 +3,14 @@ int forcePin = A0;
 int forcePin2 = A1;
 int forcePin3 = A2;
 int forcePin4 = A3;
+int forcePin5 = A4;
+int forcePin6 = A5;
 int forceReading = 0;
 int forceReading2 = 0;
 int forceReading3 = 0;
 int forceReading4 = 0;
+int forceReading5 = 0;
+int forceReading6 = 0;
 static unsigned long lastRead = 0;
 const unsigned long READ_PERIOD = 10000;
 
@@ -32,17 +36,19 @@ unsigned long debounceDelay = 500;
 File dataFile;
 
 const int chipSelect = 4;
-String S1, S2, S3, S4, T1, string2write;
+String S1, S2, S3, S4, S5, S6, T1, string2write;
 int closeStuff = 0;
 
 //Sends the string:
-void writeToSD(int sens1, int sens2, int sens3, int sens4) {
+void writeToSD(int sens1, int sens2, int sens3, int sens4, int sens5, int sens6) {
   S1 = String(sens1);
   S2 = String(sens2);
   S3 = String(sens3);
   S4 = String(sens4);
+  S5 = String(sens5);
+  S6 = String(sens6);
   T1 = String(millis());
-  string2write = T1 + ";" + S1 + ";" + S2 + ";" + S3 + ";" + S4;
+  string2write = T1 + ";" + S1 + ";" + S2 + ";" + S3 + ";" + S4 + ";" + S5 + ";" + S6;
   //File dataFile = SD.open("data.txt", FILE_WRITE);
   dataFile.println(string2write);
   //dataFile.close();
@@ -119,8 +125,10 @@ void loop() {
     forceReading2 = analogRead(forcePin2);
     forceReading3 = analogRead(forcePin3);
     forceReading4 = analogRead(forcePin4);
+    forceReading5 = analogRead(forcePin5);
+    forceReading6 = analogRead(forcePin6);
 
-    if closeStuff == 0 {
+    if (closeStuff == 0) {
       lastRead = millis();
     } else {
       lastRead += READ_PERIOD;
@@ -134,7 +142,7 @@ void loop() {
     }*/
     
     //Saving stuff:
-    writeToSD(forceReading, forceReading2, forceReading3, forceReading4);
+    writeToSD(forceReading, forceReading2, forceReading3, forceReading4, forceReading5, forceReading6);
 
     closeStuff = 1;
   }
