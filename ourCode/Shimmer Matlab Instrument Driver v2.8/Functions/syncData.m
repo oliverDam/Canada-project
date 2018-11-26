@@ -1,15 +1,15 @@
 function syncData(len)
 
-[leg, chest, press, ~] = loadData();
+[right, left, press, ~] = loadData();
 
 len = round(len);
 
-leg = leg(len(1):len(2),:);
-chest = chest(len(3):len(4),:);
+right = right(len(1):len(2),:);
+left = left(len(3):len(4),:);
 press = press(len(5):len(6),:);
 
-L1 = length(leg);
-L2 = length(chest);
+L1 = length(right);
+L2 = length(left);
 L3 = length(press);
 
 if (L1 <= L2) && (L1 <= L3)
@@ -20,10 +20,10 @@ else
     LF = L3
 end
 
-leg = leg(1:LF,:);
-chest = chest(1:LF,:);
+right = right(1:LF,:);
+left = left(1:LF,:);
 press = press(1:LF,:);
 
-save('leg.mat','leg');
-save('chest.mat','chest');
+save('right.mat','right');
+save('left.mat','left');
 save('press.mat','press');

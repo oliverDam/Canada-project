@@ -13,6 +13,9 @@ for i=1:4
     if (checkbox(i+3) == 1) && (i ~= 4)
         plot(axis1,chestData(slider(3):slider(4),i));
     end
+end
+
+for i=1:6
     if checkbox(i+6) == 1
         plot(axis1,press(slider(5):slider(6),i));
     end
