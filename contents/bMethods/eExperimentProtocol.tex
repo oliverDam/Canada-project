@@ -1,14 +1,54 @@
-\section{Experiment Protocol / description} %protokol er ikke det rigtige ord
+\section{Protocol}
+%Pinan Nidan Kata sequence with force and gyroscopic sensors
+\subsection{Aim}
+The experiment aims to measure the ground reaction forces during the performance of the karate kata Pinan Nidan. At the same time gyroscopic sensors will measure the rotational forces of the legs for later use in data analysis.
 
-For this project reaction and pressure forces are collected from subjects performing the karate kata Pinan Nidan. %Reaction forces are measured from the subjects body rotations and movements, while pressure forces are measured from under the subjects feet. 
-A karate kata is a sequence of detailed patterns of movements. Many different types of kata exist, each practice visualisation, balance and basic technique through repetition of movements. Different katas have different sequences of movements, some are more difficult than others where jumps and kicks are part of the movements. For this projects data acquisition the kata Pinan Nidan is chosen. Pinan Nidan consists of a series of movements involving steps, turning and hand strikes, where the performers' feet are on the ground at most times. It is the first kata of the Wado-Ryu system and is taught to new students as it is seen as an easier kata for beginners. \cite{Mccarthy1987, Dojo2018} Therefore it should be possible to quickly teach a complete newcomer to karate through Pinan Nidan and have an adequate performance of the kata to compare to the movements of a master of the kata. 
+\subsection{Design}
+\subsubsection{Before the experiment}
+\begin{itemize}
+\item The data file “Data.txt” on the SD card for the Arduino will be emptied and the SD card will then be placed in the Arduino-setup. 
+\item Subjects have knowledge and various amounts of experience with the kata Pinan Nidan prior to the experiment. No subject needs instruction of performance of the kata.
+\end{itemize}
 
-\subsection{Subjects} %put here instead of having it as its own section as it is very short
-For this project two healthy test subjects will be used; one who is a master at Karate, and one who is novice. Both subjects are able-bodied and have no neurological or muscular injuries. Both subjects were prior to the test instructed about the purpose of the study and their role as test subjects. Both the master and novice were instructed to perform the karate kata Pinan Nidan as best they are able to. The novice further received detailed instruction on how to perform the kata, as the novice has never before done karate. 
+\subsubsection{Initial part}
+\begin{enumerate}
+\item The person responsible for the test will mount the force sensors underneath the feet of the subject according to the labeling on the sensors. These sensors will be placed as following on both feet:
+\begin{itemize}
+$\bullet$ One FSR406 sensor on the lateral eminence of the sole \\
+$\bullet$ One FSR402 sensor on the medial eminence of the sole \\
+$\bullet$ One FSR402 sensor at the heel \\
+\end{itemize}
+\item The distance between the sensors will be measured for later use. 
+\item 1 Shimmer3 device (gyroscopes) will be mounted lateral distal to the knee. One sensor on each leg.
+\item The Arduino-setup will be mounted around the waist, and the system will be placed at the lower back.
+\item Elastic straps will be mounted right above the knee to ensure the cables for the force sensors stays in place, and to mount the Shimmer3 devices.
+\item The force sensors will be plugged into the Arduino-setup according to the numbering on both the system and the sensor cables.
+\item Shimmer3 devices will be connected to MATLAB.
+\item The subject will practice one round of Pinan Nidan to warm up.
+\item The subject stands ready to begin performing Pinan Nidan with recordings.
+\end{enumerate}
 
+\subsubsection{Data acquisition part}
+\begin{enumerate}
+\item Recording from the Shimmer3 devices will be initiated in MATLAB.
+\item The Arduino system will be powered up and recording started by pressing the designated “Record” button until the red LED lights up.
+\item Subject will be asked to stand still for 5 seconds then do a small jump, stand still for 5 seconds, do another small jump and then stand still for 5 seconds before moving on.
+\item After this initial movement, the subject will be asked to perform the Pinan Nidan.
+\item When the subject is done with the Pinan Nidan, they will be asked to perform a 5 second pause, small jump and 5 second pause again.
+\item The recording is stopped by pressing the “Record” button until the red LED turns off. The Arduino-setup will be shut off and the microSD card removed from the setup to extract the data to a computer.
+\item After data is transferred to the computer, the microSD card is inserted to the Arduino-setup, and the process continues from step 1 in “Data acquisition part”.
+\end{enumerate}
 
-%During performance of the Pinan Nidan kata, subjects will be wearing three Shimmer3 devices, located on the head, chest and waist [MAYBE]. Subjects will also be wearing shoes with FSR installed and a belt mounted Arduino Uno for data collection from the FSRs. 
+The subject will perform Pinan Nidan four times in total, one for practice and three were data is acquired.
 
+\subsubsection{Removal of the system}
+\begin{enumerate}
+\item After the data acquisition the subject will be asked to stand still and the Shimmer datastream will be stopped. 
+\item At the same time the “Record” button on the Arduino will be pressed until the red LED turns of. 
+\item The Arduino-system will be turned off and all the sensors and the Arduino will be removed from the subject.
+\end{enumerate}
 
+\subsection{Participants and statistical considerations}
+The included three participants are selected based on their experience with the kata Pinan Nidan. This includes a master (+30 years of karate experience), intermediate (3-5 years of karate experience) and novice (less than 1 year of karate experience) The number of participants is chosen as the study doesn’t aim to find a statistical significant difference between the subjects, but rather aim to examine if there’s a way to determine the stability of the subjects during the Pinan Nidan.
 
-
+The time for the experiment will be 45-60 minutes.

@@ -12,18 +12,24 @@ The Shimmer3 device has dimensions of 51mm x 34mm x 41mm and is easy to place ne
 %SHIMMER3 DEVICE BODY POSITION PLACEMENT: One device will be mounted on the head of the subject, one at the chest and one at the waist. 
 
 The force sensors used in this project are Force Sensing Resistors (FSR) from Interlink Electronics, models 402 and 406. The FSR 402 is a 13mm diameter circle single-zone resistor capable of force detection in a range from 20g to 2kg. The FSR 406 is similar but covers a larger square area of 38mm x 38mm. \cite{IE400} A total of six sensors will be used with three sensors under each foot. 
-An Arduino Uno will be used for handling recording and saving the data from the FSRs. The Arduino Uno is mounted on a breadboard, and connected to six jack stick plugs, an SD-card reader and batteries for power supply (see \figref{fig:circuitboardSetup}). The FSRs are connected to the Arduino Uno through 3.5mm jack sticks. Data from the FSRs will be stored on the SD card and be processed with MATLAB.
+An Arduino Uno will be used for handling recording and saving the data from the FSRs. The Arduino Uno is mounted on a breadboard, and connected to six jack stick plugs, an SD-card reader and batteries for power supply (see \figref{fig:heleSystemSetup}). The FSRs are connected to the Arduino through 3.5mm jack sticks. Data collection is initiated by pressing a designated record button. When recording is active a LED on the board will light up. Data from the FSRs will be stored on the SD card and be processed offline with MATLAB.
 %[foot regions: https://www.sciencephoto.com/media/581111/view/anatomy-regions-of-the-right-foot]
 %(https://www.digikey.ca/product-detail/en/interlink-electronics/30-73258/1027-1002-ND/2476470) big square sensor
 %(https://www.digikey.ca/product-detail/en/interlink-electronics/30-81794/1027-1001-ND/2476468) small round sensor
 
+%\begin{figure}[H]
+%	\includegraphics[width=.6\textwidth]{figures/circuitBoardSetup}
+%	\caption{The setup of the Arduino-setup used for data collection from the FSRs on the feet. Collected data is saved on an SD card and transferred offline to be processed on a computer with MATLAB.}
+%	\label{fig:circuitBoardSetup}  %<--remember LABEL!
+%\end{figure}
+
+The system setup as a whole for both the gyroscope and FSR parts can be seen illustrated as a block diagram on \figref{fig:heleSystemSetup}.
+
 \begin{figure}[H]
-	\includegraphics[width=.6\textwidth]{figures/circuitBoardSetup}
-	\caption{The setup of the Arduino breadboard used for data collection from the FSRs on the feet. Collected data is saved on an SD card and transferred offline to be processed on a computer with MATLAB.}
-	\label{fig:circuitBoardSetup}  %<--remember LABEL!
+	\includegraphics[width=.6\textwidth]{figures/heleSystemSetup}
+	\caption{Block diagram of the system. The left side is of the pressure sensing part utilizing the FSRs. On the right side is the Shimmer3 devices (gyroscopes). All data is collected and processed on a computer using MATLAB.}
+	\label{fig:heleSystemSetup}  %<--remember LABEL!
 \end{figure}
-
-
 
 
 

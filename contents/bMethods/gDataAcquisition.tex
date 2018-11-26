@@ -1,31 +1,20 @@
 \section{Data Acquisition}
 
-During data acquisition the subjects will be wearing the instruments presented earlier in \secref{methods:instrumentation}. One Shimmer3 device will be placed on the subjects torso at the chest. The other is placed at the left knee of the subject. 
+During data acquisition the subjects will be wearing the instruments presented earlier in \secref{methods:instrumentation}. The Shimmer3 device will be placed lateral under the knees of the subject.
 
-The FSRs will be placed on the sole of each foot of the subject. One FSR 406 is placed under the heel and two FSR 402 sensors are placed under the front of the foot at the lateral and medial part of the anterior eminence of the sole. One Arduino Uno will be placed at the back of the hip of the subject to handle data collection. Collected data will be stored on an SD card for later analysis with MATLAB. An illustration of device placement on a subject can be seen in \figref{fig:bodySysSetup}. 
+The FSRs will be placed on the sole of each foot of the subject. One FSR 406 is placed under the heel and two FSR 402 sensors are placed under the front of the foot at the lateral and medial part of the anterior eminence of the sole. The Arduino-setup will be placed at the lower back of the subject and handle data collection. Collected data will be stored on an SD card for later offline analysis with MATLAB. An illustration of device placement on a subject can be seen in \figref{fig:bodySysSetup}.
 
 %% SENSOR BAIT ALERT:
-%jeg har skrevet at vi placere en FSR 406 (den store firkant sensor) under hælen. vi ved allerede at den skal sidde nærmest storetåen, men det kan vi tage med til vores test afsnit og skrive noget i retningen af:
-%sensor bait tekst flyttet til test section
+%jeg har skrevet at vi placere en FSR 406 (den store firkant sensor) under hælen. den skal sidde "bag" lilletåen.
+%sensor bait tekst flyttet til bNEWSystemTest.tex
 
 \begin{figure}[H]
 	\includegraphics[width=.6\textwidth]{figures/bodySysSetup}
-	\caption{The placement of the Shimmer3 IMU devices, Arduino breadboard and FSRs on a test subject.}
+	\caption{The placement of the Shimmer3 IMU devices, Arduino-setup and FSRs on a test subject.}
 	\label{fig:bodySysSetup}  %<--remember LABEL!
 \end{figure}
 
 Data acquisition from both the FSR sensors and the Shimmer3 devices are set to have a sample frequency of 100Hz. The sample rate is decided to be the same so it is possible to match the two data streams to each other, so it is possible to compare measured pressure forces under the feet while matching it to movement of the body. A simple graphical user interface (GUI) have been developed to match the data. This manual approach is favourable for this project as it were determined that it would be more time consuming to develop an algorithm to automatically match data streams. It would also go beyond the scope for the project.
-
-
-
-
-The system setup as a whole for both the gyroscope and FSR parts can be seen illustrated on \figref{fig:heleSystemSetup}.
-
-\begin{figure}[H]
-	\includegraphics[width=.6\textwidth]{figures/heleSystemSetup}
-	\caption{The setup of the Arduino breadboard used for data collection from the FSRs on the feet, and the Shimmer3 devices on the knees of the subject. All data is collected and processed on a computer using MATLAB.}
-	\label{fig:heleSystemSetup}  %<--remember LABEL!
-\end{figure}
 
 
 
