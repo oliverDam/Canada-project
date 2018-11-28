@@ -1,9 +1,7 @@
 function [COP,COPR,COPL] = findCOP(p)
 
 %% Function finds COP for entire body, plus the COP for each foot. Input is
-%  a nx6 pressure reading matrix.
-%
-% [COP,COPR,COPL] = findCOP(p)
+%  a nx6 pressure reading matrix and ou
 
 %Find COP hopefully
 for i = 1:length(p)

@@ -4,13 +4,12 @@ function [result] = doGyroFFT(data)
 % data(1) = data1;
 % data(2) = data2;
 % data(3) = data3;
-
+[L,S] = size(data);
 Fs = 100;
 T = 1/Fs;
-L = length(data);
 t = (0:L-1)*T;
 
-for i = 1:3
+for i = 1:S
     
     Y(:,i) = fft(data(:,i));
     P2 = abs(Y(:,i)/L);
@@ -24,18 +23,22 @@ end
     ylimits = [0 3000];
     
     figure;
-    subplot(3,1,1)
+    subplot(S,1,1)
     plot(f,P1(:,1),'b')
     legend('X')
     xlim(xlimits)
     ylim(ylimits)
-    subplot(3,1,2)
+    subplot(S,1,2)
     plot(f,P1(:,2),'r')
     legend('Y')
     xlim(xlimits)
     ylim(ylimits)
-    subplot(3,1,3)
-    plot(f,P1(:,3),'g')
-    legend('Z')
-    xlim(xlimits)
-    ylim(ylimits)
+    try
+        subplot(S,1,3)
+        plot(f,P1(:,3),'g')
+        legend('Z')
+        xlim(xlimits)
+        ylim(ylimits)
+    catch
+        lol = 420;
+    end
