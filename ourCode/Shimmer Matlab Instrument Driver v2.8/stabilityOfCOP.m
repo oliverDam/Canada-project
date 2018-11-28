@@ -53,9 +53,9 @@ CLen = CLen/L;
 RLen = RLen/L;
 LLen = LLen/L;
 
-%Span of COP should be either * or / to achieve score:
-CScore = CLen*CSpan;
-RScore = RLen*RSpan;
-LScore = LLen*LSpan;
+%Span of COP used to calculate score:
+CScore = CLen/CSpan;
+RScore = RLen/RSpan;
+LScore = LLen/LSpan;
 
-score = [CScore,RScore,LScore];
+score = [CScore,RScore,LScore]*1000;
