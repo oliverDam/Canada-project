@@ -1,0 +1,3 @@
+OliverWalkTestDATA: vent, hop, vent, gå 5 skridt, 180 turn, gå 5 skridt, vent, hop, vent, sway to left, sway to right, sway to front, sway to back, hop, stort hop, stop.
+
+OliverWalkTestDATA2: vent, hop, vent, gå 5 skridt, 180 turn, gå 5 skridt, vent, hop, vent, stop.
