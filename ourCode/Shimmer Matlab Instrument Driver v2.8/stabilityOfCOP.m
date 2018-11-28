@@ -37,7 +37,7 @@ CSpan = sum((CMax-CMin));
 RSpan = sum((RMax-RMin));
 LSpan = sum((LMax-LMin));
 
-%Length of COP divided by samples/time taken:
+%Length of COP:
 CLen = 0;
 RLen = 0;
 LLen = 0;
@@ -48,10 +48,12 @@ RLen = RLen + sqrt( (COPR(i+1,1)-COPR(i,1))^2 + (COPR(i+1,2)-COPR(i,2))^2 );
 LLen = LLen + sqrt( (COPL(i+1,1)-COPL(i,1))^2 + (COPL(i+1,2)-COPL(i,2))^2 );
 end
 
+%Length divided by samples/time taken
 CLen = CLen/L;
 RLen = RLen/L;
 LLen = LLen/L;
 
+%Span of COP should be either * or / to achieve score:
 CScore = CLen*CSpan;
 RScore = RLen*RSpan;
 LScore = LLen*LSpan;
