@@ -14,6 +14,28 @@ R = doButter(right,3,fc,fs);
 L = doButter(left,3,fc,fs);
 P = doButter(press,3,fc,fs);
 
+%FFT of gyro-data:
+FFTR = doGyroFFT(R);
+FFTL = doGyroFFT(L);
+
+%Split FFT into low, med and high frequencies (0-2.5 ,2.5-5 and 5-7.5):
+RLow = FFTR(2:116,:);
+RMed = FFTR(117:231,:);
+RHig = FFTR(232:346,:);
+
+LLow = FFTL(2:116,:);
+LMed = FFTL(117:231,:);
+LHig = FFTL(232:346,:);
+
+%Finding the distribution of frequencies. High frequency = lower score and
+%vice-versa:
+RFrqDist = ((sum(RMed)+sum(RLow)-sum(RHig))/...
+    (sum(RMed)+sum(RLow)+sum(RHig)));
+LFrqDist = ((sum(LMed)+sum(LLow)-sum(LHig))/...
+    (sum(LMed)+sum(LLow)+sum(LHig)));
+
+AvgFrqDist = mean([RFrqDist, LFrqDist]);
+
 %Finding the COP:
 [COP,COPR,COPL] = findCOP(P);
 
@@ -32,7 +54,7 @@ CMean = mean(COP);
 RMean = mean(COPR);
 LMean = mean(COPL);
 
-%Max span divided by mean:
+%Max span:
 CSpan = sum((CMax-CMin));
 RSpan = sum((RMax-RMin));
 LSpan = sum((LMax-LMin));
@@ -54,8 +76,8 @@ RLen = RLen/L;
 LLen = LLen/L;
 
 %Span of COP used to calculate score:
-CScore = CLen/CSpan;
-RScore = RLen/RSpan;
-LScore = LLen/LSpan;
+CScore = (CLen/CSpan)*AvgFrqDist;
+RScore = (RLen/RSpan)*RFrqDist;
+LScore = (LLen/LSpan)*LFrqDist;
 
 score = [CScore,RScore,LScore]*1000;
