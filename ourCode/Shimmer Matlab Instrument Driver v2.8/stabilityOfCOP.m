@@ -80,9 +80,9 @@ LLen = LLen + sqrt( (ScCOPL(i+1,1)-ScCOPL(i,1))^2 + (ScCOPL(i+1,2)-ScCOPL(i,2))^
 end
 
 %Length divided by samples/time taken
-CLen = CLen/L*100;
-RLen = RLen/L*100;
-LLen = LLen/L*100;
+CLen = CLen/L;
+RLen = RLen/L;
+LLen = LLen/L;
 
 %Span of COP used to calculate score:
 CScore = (1*CLen*AvgFrqDist)/CSpan;
