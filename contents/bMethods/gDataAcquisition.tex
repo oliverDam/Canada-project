@@ -12,20 +12,5 @@ For saving acquired data from the FSR sensors an Arduino program have been writt
 	\label{fig:FSRNumbering}  %<--remember LABEL!
 \end{figure}
 
-%maybe something on filtering if we end up doing that
-\subsection{Filtering}
-Butterworth filtering of the gyroscope measurements
 
-%MATLAB alignment GUI description
-\subsection{Data Alignment}
-Because the measurements from the FSRs are run on an Arduino, and the gyroscopes run through a Shimmer Sensing developed script for MATLAB, the timing for the measurements are run differently. In order to analyse FSR data to the corresponding time for gyroscope data a data alignment GUI have been developed in MATLAB. The implemented alignment program is a simple GUI which creates a plot where different channels from the six FSRs and six DoFs from the gyroscopes (three for each on each leg) can be shown or hidden. Additionally each channel can be translated left or right. This enables to align data from the FSRs to the gyroscopes, based on a spike in measurements caused by a small jump subjects will be asked to perform before and after performance of Pinan Nidan. An example of the alignment GUI can be seen in \figref{fig:alignGUI}.
-
-\begin{figure}[H]
-	\includegraphics[width=.6\textwidth]{figures/alignGUI}
-	\caption{The alignment GUI showing a selected number of channels from the FSRs and gyroscopes. All channels can be translated in order to align timestamps for the FSR measurements to timestamps for the gyroscopes.}
-	\label{fig:alignGUI}  %<--remember LABEL!
-\end{figure}
-
-\subsection{Calculation of Centre of Pressure}
-MATLAB COP code description
 
