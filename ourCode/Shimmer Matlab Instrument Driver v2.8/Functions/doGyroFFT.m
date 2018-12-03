@@ -1,5 +1,5 @@
 %fft of gyroscopes
-function [result] = doGyroFFT(data)
+function [result] = doGyroFFT(data,plot)
 
 % data(1) = data1;
 % data(2) = data2;
@@ -21,7 +21,8 @@ end
     
     xlimits = [0 15];
     ylimits = [0 3000];
-    
+
+if plot==1
     figure;
     subplot(S,1,1)
     plot(f,P1(:,1),'b')
@@ -42,5 +43,6 @@ end
     catch
         lol = 420;
     end
+end
     
     result=P1;

@@ -39,6 +39,9 @@ AvgFrqDist = mean([RFrqDist, LFrqDist]);
 %Finding the COP:
 [COP,COPR,COPL] = findCOP(P);
 
+%Rescale for comparability of length:
+%scaleData
+
 %Length, max/min and mean values of COP:
 L = length(COP);
 
@@ -63,20 +66,15 @@ LSpan = abs(sum((LMax-LMin)/(sum(COPL)/L)));
 % RSpan = sum(scaleData(RMax-RMin,0,1));
 % LSpan = sum(scaleData(LMax-LMin,0,1));
 
-%Rescale for comparability of length:
-ScCOP = scaleData(COP,0,1);
-ScCOPR = scaleData(COPR,0,1);
-ScCOPL = scaleData(COPL,0,1);
-
 %Length of COP:
 CLen = 0;
 RLen = 0;
 LLen = 0;
 
 for i = 1:L-1
-CLen = CLen + sqrt( (ScCOP(i+1,1)-ScCOP(i,1))^2 + (ScCOP(i+1,2)-ScCOP(i,2))^2 );
-RLen = RLen + sqrt( (ScCOPR(i+1,1)-ScCOPR(i,1))^2 + (ScCOPR(i+1,2)-ScCOPR(i,2))^2 );
-LLen = LLen + sqrt( (ScCOPL(i+1,1)-ScCOPL(i,1))^2 + (ScCOPL(i+1,2)-ScCOPL(i,2))^2 );
+CLen = CLen + sqrt( (COP(i+1,1)-COP(i,1))^2 + (COP(i+1,2)-COP(i,2))^2 );
+RLen = RLen + sqrt( (COPR(i+1,1)-COPR(i,1))^2 + (COPR(i+1,2)-COPR(i,2))^2 );
+LLen = LLen + sqrt( (COPL(i+1,1)-COPL(i,1))^2 + (COPL(i+1,2)-COPL(i,2))^2 );
 end
 
 %Length divided by samples/time taken
