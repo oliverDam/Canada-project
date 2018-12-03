@@ -39,34 +39,34 @@ AvgFrqDist = mean([RFrqDist, LFrqDist]);
 %Finding the COP:
 [COP,COPR,COPL] = findCOP(P);
 
-%Length, max/min and mean values of COP:
-L = length(COP);
-
-CMin = min(COP);
-RMin = min(COPR);
-LMin = min(COPL);
-
-CMax = max(COP);
-RMax = max(COPR);
-LMax = max(COPL);
-
-CMean = mean(COP);
-RMean = mean(COPR);
-LMean = mean(COPL);
-
-%Max span: might be unusable 
-CSpan = abs(sum((CMax-CMin)/(sum(COP)/L)));
-RSpan = abs(sum((RMax-RMin)/(sum(COPR)/L)));
-LSpan = abs(sum((LMax-LMin)/(sum(COPL)/L)));
-
-% CSpan = sum(scaleData(CMax-CMin,0,1));
-% RSpan = sum(scaleData(RMax-RMin,0,1));
-% LSpan = sum(scaleData(LMax-LMin,0,1));
-
 %Rescale for comparability of length:
 ScCOP = scaleData(COP,0,1);
 ScCOPR = scaleData(COPR,0,1);
 ScCOPL = scaleData(COPL,0,1);
+
+%Length, max/min and mean values of COP:
+L = length(COP);
+
+CMin = min(ScCOP);
+RMin = min(ScCOPR);
+LMin = min(ScCOPL);
+
+CMax = max(ScCOP);
+RMax = max(ScCOPR);
+LMax = max(ScCOPL);
+
+% CMean = mean(COP);
+% RMean = mean(COPR);
+% LMean = mean(COPL);
+
+%Max span: might be unusable 
+CSpan = abs(sum((CMax-CMin)/(sum(ScCOP)/L)));
+RSpan = abs(sum((RMax-RMin)/(sum(ScCOPR)/L)));
+LSpan = abs(sum((LMax-LMin)/(sum(ScCOPL)/L)));
+
+% CSpan = abs(sum(max(ScCOP)-min(ScCOP)));
+% RSpan = abs(sum(max(ScCOPR)-min(ScCOPR)));
+% LSpan = abs(sum(max(ScCOPL)-min(ScCOPL)));
 
 %Length of COP:
 CLen = 0;
@@ -80,14 +80,14 @@ LLen = LLen + sqrt( (ScCOPL(i+1,1)-ScCOPL(i,1))^2 + (ScCOPL(i+1,2)-ScCOPL(i,2))^
 end
 
 %Length divided by samples/time taken
-CLen = CLen/L;
-RLen = RLen/L;
-LLen = LLen/L;
+CLen = CLen/L*100;
+RLen = RLen/L*100;
+LLen = LLen/L*100;
 
 %Span of COP used to calculate score:
-CScore = (CLen/CSpan)*AvgFrqDist;
-RScore = (RLen/RSpan)*RFrqDist;
-LScore = (LLen/LSpan)*LFrqDist;
+CScore = (1*CLen*AvgFrqDist)/CSpan;
+RScore = (1*RLen*RFrqDist)/RSpan;
+LScore = (1*LLen*LFrqDist)/LSpan;
 
 score = [CScore,RScore,LScore]*1000;
 CData = [CLen,CSpan,AvgFrqDist];
