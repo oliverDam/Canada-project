@@ -1,0 +1,30 @@
+\section{Data Analysis / Processing}
+This section covers processing and analysis of acquired data. All data processing is performed using MATLAB. 
+
+%maybe something on filtering if we end up doing that
+\subsection{Filtering}
+%Butterworth filtering of the gyroscope measurements
+%Filtering has been implemented in the form of a low pass third order Butterworth filter with a cut off frequency at 25Hz. Since measurement are 
+The spectral density of gyroscope data have been analysed to investigate frequencies of interest. From the Fourier transform (FT) of gyroscope data (see \figref{fig:gyroFFTPlot}) it can be observed that frequencies over 10Hz contain very little information. To avoid possible noise and artefacts a third order Butterworth filter have been implemented with a cut off frequency at 25Hz. This filter order and cut off frequency is decided \textbf{??}
+
+\begin{figure}[H]
+	\includegraphics[width=.6\textwidth]{figures/gyroFFTPlot}
+	\caption{The power spectral density of gyroscope data from the left leg of one subject.}
+	\label{fig:gyroFFTPlot}  %<--remember LABEL!
+\end{figure}
+
+
+
+%MATLAB alignment GUI description
+\subsection{Data Alignment}
+Because the measurements from the FSRs are run on an Arduino, and the gyroscopes run through a Shimmer Sensing developed script for MATLAB, the timing for the measurements are run differently. In order to analyse FSR data to the corresponding time for gyroscope data a data alignment GUI have been developed in MATLAB. The implemented alignment program is a simple GUI which creates a plot where different channels from the six FSRs and six DoFs from the gyroscopes (three for each on each leg) can be shown or hidden. Additionally each channel can be translated left or right. This enables to align data from the FSRs to the gyroscopes, based on a spike in measurements caused by a small jump subjects will be asked to perform before and after performance of Pinan Nidan. An example of the alignment GUI can be seen in \figref{fig:alignGUI}.
+
+\begin{figure}[H]
+	\includegraphics[width=.6\textwidth]{figures/alignGUI}
+	\caption{The alignment GUI showing a selected number of channels from the FSRs and gyroscopes. All channels can be translated in order to align timestamps for the FSR measurements to timestamps for the gyroscopes.}
+	\label{fig:alignGUI}  %<--remember LABEL!
+\end{figure}
+
+
+\subsection{Calculation of Centre of Pressure}
+MATLAB COP code description
