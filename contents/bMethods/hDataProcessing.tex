@@ -5,7 +5,7 @@ This section covers processing and analysis of acquired data. All data processin
 \subsection{Filtering}
 %Butterworth filtering of the gyroscope measurements
 %Filtering has been implemented in the form of a low pass third order Butterworth filter with a cut off frequency at 25Hz. Since measurement are 
-The spectral density of gyroscope data have been analysed to investigate frequencies of interest. From the Fourier transform (FT) of gyroscope data (see \figref{fig:gyroFFTPlot}) it can be observed that frequencies over 10Hz contain very little information. To avoid possible noise and artefacts a third order Butterworth filter have been implemented with a cut off frequency at 25Hz. This filter order and cut off frequency is decided \textbf{??}
+The spectral density of gyroscope data have been analysed to investigate frequencies of interest. From the Fourier transform (FT) of gyroscope data (see \figref{fig:gyroFFTPlot}) it can be observed that frequencies over 10Hz contain very little information. To avoid possible noise and artefacts a third order Butterworth filter have been implemented with a cut off frequency at 25Hz. %This filter order and cut off frequency is decided \textbf{??}
 
 \begin{figure}[H]
 	\includegraphics[width=.6\textwidth]{figures/gyroFFTPlot}
