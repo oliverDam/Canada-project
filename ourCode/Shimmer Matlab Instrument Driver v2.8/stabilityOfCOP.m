@@ -25,13 +25,13 @@ ScCOPL = scaleData(COPL,0,1);
 %Length, max/min and mean values of COP:
 l = length(COP);
 
-CMin = min(ScCOP);
-RMin = min(ScCOPR);
-LMin = min(ScCOPL);
+CMin = min(COP);
+RMin = min(COPR);
+LMin = min(COPL);
 
-CMax = max(ScCOP);
-RMax = max(ScCOPR);
-LMax = max(ScCOPL);
+CMax = max(COP);
+RMax = max(COPR);
+LMax = max(COPL);
 
 % CMean = mean(COP);
 % RMean = mean(COPR);
@@ -52,15 +52,15 @@ RLen = 0;
 LLen = 0;
 
 for i = 1:l-1
-CLen = CLen + sqrt( (ScCOP(i+1,1)-ScCOP(i,1))^2 + (ScCOP(i+1,2)-ScCOP(i,2))^2 );
-RLen = RLen + sqrt( (ScCOPR(i+1,1)-ScCOPR(i,1))^2 + (ScCOPR(i+1,2)-ScCOPR(i,2))^2 );
-LLen = LLen + sqrt( (ScCOPL(i+1,1)-ScCOPL(i,1))^2 + (ScCOPL(i+1,2)-ScCOPL(i,2))^2 );
+CLen = CLen + sqrt( (COP(i+1,1)-COP(i,1))^2 + (COP(i+1,2)-COP(i,2))^2 );
+RLen = RLen + sqrt( (COPR(i+1,1)-COPR(i,1))^2 + (COPR(i+1,2)-COPR(i,2))^2 );
+LLen = LLen + sqrt( (COPL(i+1,1)-COPL(i,1))^2 + (COPL(i+1,2)-COPL(i,2))^2 );
 end
 
 %Length divided by samples/time taken
-CLen = (CLen/l)/CSpan*10;
-RLen = (RLen/l)/CSpan*10;
-LLen = (LLen/l)/CSpan*10;
+CLen = (CLen/l)*10;
+RLen = (RLen/l)*10;
+LLen = (LLen/l)*10;
 
 %FFT of gyro-data:
 FFTR = doGyroFFT(R,0);
@@ -85,9 +85,9 @@ LFrqDist = ((sum(LMed)+sum(LLow)-sum(LHig))/...
 AvgFrqDist = mean([RFrqDist, LFrqDist]);
 
 %Span of COP used to calculate score:
-CScore = (CLen*CSpan)*(1-AvgFrqDist);
-RScore = (RLen*RSpan)*(1-RFrqDist);
-LScore = (LLen*LSpan)*(1-LFrqDist);
+CScore = (CLen/CSpan)*(1-AvgFrqDist);
+RScore = (RLen/RSpan)*(1-RFrqDist);
+LScore = (LLen/LSpan)*(1-LFrqDist);
 
 score = [CScore,RScore,LScore]*100;
 CData = [CLen,CSpan,AvgFrqDist];
