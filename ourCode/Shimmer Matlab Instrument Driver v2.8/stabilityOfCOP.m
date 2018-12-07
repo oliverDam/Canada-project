@@ -15,7 +15,7 @@ L = doButter(left,3,fc,fs);
 P = doButter(press,3,fc,fs);
 
 %Finding the COP:
-[COP,COPR,COPL] = findCOP2(P);
+[COP,COPR,COPL] = findCOP(P);
 
 %Rescale for comparability of length:
 ScCOP = scaleData(COP,0,1);

@@ -14,8 +14,10 @@ for i = 1:length(p)
     end
     
     %COP for both feet:
-    COP(i,1) = sum(p(i,1:3))-sum(p(i,4:6));
-    COP(i,2) = sum(p(i,[1 4]))-sum(p(i,[2:3 5:6]));
+%     COP(i,1) = sum(p(i,1:3).*[0.6 0.4 1])-sum(p(i,4:6).*[0.6 0.4 1]);
+%     COP(i,2) = sum(p(i,[1:2 4:5]).*[0.6 0.4 0.6 0.4])-sum(p(i,[3 6]));
+    COP(i,1) = sum(p(i,1:3).*[1 1 2])-sum(p(i,4:6).*[1 1 2]);
+    COP(i,2) = sum(p(i,[1:2 4:5]))-sum(p(i,[3 6])*2);
     
     %Left and right COP:
     COPR(i,1) = sum(p(i,1))-sum(p(i,2));
