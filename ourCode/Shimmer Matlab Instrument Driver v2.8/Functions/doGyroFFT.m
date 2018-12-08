@@ -11,7 +11,7 @@ t = (0:L-1)*T;
 
 for i = 1:S
     
-    Y(:,i) = fft(data(:,i));
+    Y(:,i) = fft(data(:,i))
     P2 = abs(Y(:,i)/L);
     P1(:,i) = P2(1:floor(L/2+1));
     P1(2:end-1,i) = 2*P1(2:end-1,i);
