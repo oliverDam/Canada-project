@@ -5,9 +5,7 @@ function getAnswers(Scores,Measures)
 %Measures = D(1),H1D(2),Y1D(2),P2D(2),H1D(3),Y1D(3),P2D(3);H2D(1),Y2D(1),P3D(1),H2D(2),Y2D(2),P3D(2),H2D(3),Y2D(3),P3D(3);H3D(1),Y3D(1),P4D(1),H3D(2),Y3D(2),P4D(2),H3D(3),Y3D(3),P4D(3)]
 
 %Statistics for scores and measures:
-[pScoreAvg,pScoreAvgMult] = bonferonni(Scores(:,1:3),1)
-[pScoreR,pScoreRMult] = bonferonni(Scores(:,4:6),1);1
-[pScoreL,pScoreLMult] = bonferonni(Scores(:,7:9),1);
-[pLeng,pLengMult] = bonferonni(Measures(:,1:3),1);
-[pSpan,pSpanMult] = bonferonni(Measures(:,4:6),1);
-[pFreq,pFreqMult] = bonferonni(Measures(:,7:9),1);
+[pScoreAvg,pScoreAvgMult] = bonferonni(Scores(:,1:3))
+[pLeng,pLengMult] = bonferonni(Measures(:,1:3))
+[pSpan,pSpanMult] = bonferonni(Measures(:,4:6))
+[pFreq,pFreqMult] = bonferonni(Measures(:,7:9))

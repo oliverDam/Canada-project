@@ -1,6 +1,6 @@
-function [pp,p] = bonferonni(data,lol)
+function [pp,p] = bonferonni(data)
 
-[pp,~,stats] = friedman(data,lol);
+[pp,~,stats] = kruskalwallis(data);
 
 results = multcompare(stats,'CType','hsd');
 
