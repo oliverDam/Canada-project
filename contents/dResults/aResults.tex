@@ -1,14 +1,52 @@
-%results
 %\section{Results}
-
-This is the results section
-
-Here results will be presented, with numbers and maybe some graphs or plots of the numbers.
+%Here results will be presented, with numbers and maybe some graphs or plots of the numbers.
 
 
+The outcome measures calculated for each subject can be seen in \tabref{tab:measures}.
+\begin{table}[h]
+	\begin{tabular}{|l|l|l|l|l}
+		\cline{1-4}
+		                 & Length                      & Span                      & Frequency               &  \\ \cline{1-4}
+		Novice       & 0.458 $\pm$ 0.050 & 0.351 $\pm$ 0.013 & 0.649 $\pm$ 0.015 &  \\ \cline{1-4}
+		Intermediate & 0.555 $\pm$ 0.022 & 0.360 $\pm$ 0.020 & 0.657 $\pm$ 0.017 &  \\ \cline{1-4}
+		Master       & 0.611 $\pm$ 0.051 & 0.413 $\pm$ 0.064 & 0.739 $\pm$ 0.008 &  \\ \cline{1-4}
+	\end{tabular}
+\caption{Outcome measures for each subject. Average measurement found over the three repetitions each subject performed.}
+\label{tab:measures}
+\end{table}
 
-results for COP 
 
-results for movements scores
+The final performance score for each subject is presented in \tabref{tab:scores}.
 
-maybe some statistics results
+\begin{table}[h]
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+				          & Novice                     & Intermediate           & Master                   \\  \hline
+		Avg. Score & 4.430 $\pm$ 0.339 & 5.291 $\pm$ 0.348 & 3.867 $\pm$ 0.441 \\ \hline
+	\end{tabular}
+\caption{Performance scores for each subject}
+\label{tab:scores}
+\end{table}
+
+A Kruskal-Wallis test has been implemented for the statistical analysis of the results, as the data comes from non-Gaussian distributed data, and the comparison is between three unmatched groups. The results from the Kruskal-Wallis test were analysed using Bonferroni correction to compensate for the comparison of three groups, and avoid false negatives or positives. The results of the statistical analysis are presented in \tabref{tab:pValues}.
+
+\begin{table}[h]
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		& Overall & N vs. I & N vs. M & I vs. M \\ \hline
+		Score:     & 0.051   & 0.229   & 0.736   & 0.045   \\ \hline
+		Length:    & 0.051   & 0.229   & 0.045   & 0.736   \\ \hline
+		Span:      & 0.329   & 0.736   & 0.295   & 0.736   \\ \hline
+		Frequency: & 0.039   & 0.549   & 0.030   & 0.295   \\ \hline
+	\end{tabular}
+	\caption{Statistical analysis p-values for comparison between subjects}
+	\label{tab:pValues}
+\end{table}
+
+A significant difference ($p<0.05$) was found between the length of the kata for the novice ($0.458\pm0.050$) and the master ($0.611\pm0.051$). No other differences were found within the length measure.
+
+There were no significant differences to be found within the span measure, with all p-values above 0.05.
+
+The frequency measure showed a significant difference ($p<0.05$) between the intermediate($0.657\pm0.017$) and the master ($0.739\pm0.008$). None of the other comparisons showed any significant difference within this measure.
+
+The analysis of the scores showed a significant difference ($p<0.05$) between the intermediate ($5.291\pm0.348$) and the master ($3.867\pm0.441$). Otherwise no difference was to be found within the scores.
