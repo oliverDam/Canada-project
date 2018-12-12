@@ -5,7 +5,16 @@ This section covers processing and analysis of acquired data. All data processin
 \subsection{Filtering} \label{subsec:filtering}
 %Butterworth filtering of the gyroscope measurements
 %Filtering has been implemented in the form of a low pass third order Butterworth filter with a cut off frequency at 25Hz. Since measurement are 
-The spectral density of gyroscope data have been analysed to investigate frequencies of interest. From the Fourier transform (FT) of gyroscope data (see \figref{fig:gyroFFTPlot}) it can be observed that frequencies over 10Hz contain very little information. To avoid possible noise and artefacts a low pass third order Butterworth filter have been implemented with a cut off frequency at 25Hz. %This filter order and cut off frequency is decided \textbf{??}
+In order to determine a adequate filter for filtering of the FSR data the a spectral analysis have been conducted. A Fourier transform (FT) of FSR data can be seen in \figref{fig:FSR_FFTplot}, where it can be seen that frequencies 
+
+The spectral density of gyroscope data have been analysed to investigate frequencies of interest. From the Fourier transform (FT) of gyroscope data (see \figref{fig:gyroFFTPlot}) it can be observed that frequencies over 10Hz contain very little information. To avoid possible noise and artefacts a low pass third order Butterworth filter have been implemented with a cut off frequency at 25Hz. %no
+
+
+FSR data filtering at 5Hz according to \cite{Prieto1996}. However we examine our data and know that subjets have dragged their feet over the ground/floor during data acquisition (as one does when doing karate). This produce high frequencies which are unwanted for our data analysis, thus we lower the cutoff frequency to 2.5Hz as we only want to examine subjects' sway and not noise/artefacts produced from movements. 
+
+
+Gyroscope data have also been filtered through a third order low pass Butterworth filter with cut off frequency set at 1.25Hz, according to \cite{Alberts2015}. 
+
 
 \begin{figure}[H]
 	\includegraphics[width=.6\textwidth]{figures/gyroFFTPlot}
@@ -36,13 +45,13 @@ For calculating a movement score four separate scores will be calculated; COP, l
 The COP (check for prior use of abbreviation) calculation consists of two simple equations to find the displacement of balance in the X and Y directions. To ensure the calculated values are unrelated to the weight of the test subject, but solely describes the displacement of balance, each calculation of the pressure distribution will be divided by the overall pressure placed on all sensors. The COP\lowercase{x} equation finds the distribution of weight between the two feet, whereas the COP\lowercase{y} equation describes the distribution between the sensors on the front and back of the foot. The COP measure is used in calculations of the length and span measures. In addition to the displacement of these sensors in relation to each other and to compensate for the number of sensors on the front and back of the foot, a weight ($W$) will be added to the pressure readings ($P$).
 The COP calculations for X and Y directions follow \eqref{eq:COPx} and \eqref{eq:COPy}:
 
-\begin{equation}
+\begin{equation} \label{eq:COPx}
 COP_x(i) =  \frac{\sum_{i=1}^{3}P_i W_i - \sum_{i=4}^{6}P_i W_i}{\sum_{i=1}^{6}P_i W_i}
-\end{equation} \label{eq:COPx}
+\end{equation} 
 
-\begin{equation}
+\begin{equation} \label{eq:COPy}
 COP_y(i) =  \frac{\sum(P_3 W_3 + P_6 W_6) - \sum(P_1 W_1+P_2 W_2+P_4 W_4+P_5 W_5)}{\sum_{i=1}^{6}P_i W_i}
-\end{equation} \label{eq:COPy}
+\end{equation} 
 
 
 %method for calculating scores based on calculated COP and gyroscope data
@@ -50,7 +59,7 @@ COP_y(i) =  \frac{\sum(P_3 W_3 + P_6 W_6) - \sum(P_1 W_1+P_2 W_2+P_4 W_4+P_5 W_5
 \subsubsection{Calculation of length score}
 The length of the COP outcomes was calculated and divided by the length ($L$) of the recorded data, so the outcome measure described the mean COP change between each sample. To ensure this measure had an effect on the final score it was multiplied by a factor of 10. The length was calculated individually for X and Y directions for later use in score calculation (see \eqref{eq:length}).
 
-\begin{equation}
+\begin{equation} \label{eq:length}
 	Length_{x,y} = \frac{\sum_{i=1}^{L-1}\sqrt{(COP_{x,y} (i+1)-COP_{x,y} (i))^2}}{L} * 10
 \end{equation}
 
@@ -60,7 +69,7 @@ Calculation of the span describes the span between the outer most points of the 
 The span is calculated by taking the absolute value of the difference between maximum and minimum observed values of COP. This is calculated for both the X and Y directions. In the same manner as the length measure is scaled by a factor of 10, the span measure is divided by 10 to decrease the effect of the span in relation to the other measures. Span is calculated as shown in \eqref{eq:span}:
 %Start out by finding min and max of scaled COP and difference between these values. Sum and abs of difference to find final span value. This is then divided by 10 for scaling in score calculation.
 
-\begin{equation}
+\begin{equation} \label{eq:span}
 Span_{x,y} = \frac{\left| max(COP_{x,y})-min(COP_{x,y})\right|}{10}
 \end{equation}
 
