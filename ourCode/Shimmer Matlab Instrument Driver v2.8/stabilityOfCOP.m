@@ -8,10 +8,11 @@ function [score,CData] = stabilityOfCOP(right,left,press)
 % [score] = stabilityOfCOP(right,left,press)
 
 %Filtering signals:
-fc = 25;
+fc = 1.25;
 fs = 100;
 R = doButter(right,3,fc,fs);
 L = doButter(left,3,fc,fs);
+fc = 2.5;
 P = doButter(press,3,fc,fs);
 
 %Finding the COP:
@@ -53,16 +54,36 @@ CLen = (CLen/l)*10;
 FFTR = doGyroFFT(R,0);
 FFTL = doGyroFFT(L,0);
 
+%Intensity of movements:
+%intense = mean([sum(abs(right))/l,sum(abs(left))/l])/10000;
+
+highIntensity = 0;
+meen = [mean(abs(right)),mean(abs(left))];
+eigil = [abs(right),abs(left)];
+for i=1:l
+    for j=1:6
+        if meen(j) <= eigil(i,j)
+            highIntensity(i,j) = 1;
+        else
+            highIntensity(i,j) = 0;
+        end
+    end
+end
+
+highIntensity = mean(sum(highIntensity.*[abs(right),abs(left)])./sum([abs(right),abs(left)]));
+
+%highIntensity = mean(mean(highIntensity));
+
 %Split FFT into low, med and high frequencies (0-2.5 ,2.5-5 and 5-7.5):
-% RLow = FFTR(2:58,:);
-% RMed = FFTR(117:231,:);
-% RHig = FFTR(115:172,:);
+% RLow = FFTR(2:110,:);
+% RHig = FFTR(111:171,:);
+% Small movements = high frequencies and big movements = low frequencies.
 
-RLow = FFTR(2:111,:);
-RHig = FFTR(111:171,:);
+RLow = FFTR(2:19,:);
+RHig = FFTR(20:39,:);
 
-LLow = FFTL(2:110,:);
-LHig = FFTL(111:171,:);
+LLow = FFTL(2:19,:);
+LHig = FFTL(20:39,:);
 
 %Finding the distribution of frequencies. High frequency = lower score and
 %vice-versa:
@@ -75,7 +96,6 @@ AvgFrqDist = mean([RFrqDist, LFrqDist]);
 %CScore = (CLen/CSpan)*(1-AvgFrqDist);
 %RScore = (RLen/RSpan)*(1-RFrqDist);
 %LScore = (LLen/LSpan)*(1-LFrqDist);
-Score = sum(CLen/CSpan)*(1-AvgFrqDist);
-
+Score = sum((1-CLen)/CSpan)*(1-AvgFrqDist)*(1-highIntensity);
 score = [Score]*10;%,CScore,RScore,LScore]*100;
-CData = [sum(CLen),sum(CSpan),AvgFrqDist];
+CData = [sum(CLen),sum(CSpan),AvgFrqDist,highIntensity];

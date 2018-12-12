@@ -1,5 +1,5 @@
 %fft of gyroscopes
-function [result] = doGyroFFT(data,doPlot)
+function [result,Y] = doGyroFFT(data,doPlot)
 
 % data(1) = data1;
 % data(2) = data2;
@@ -11,7 +11,7 @@ t = (0:L-1)*T;
 
 for i = 1:S
     
-    Y(:,i) = fft(data(:,i))
+    Y(:,i) = fft(data(:,i));
     P2 = abs(Y(:,i)/L);
     P1(:,i) = P2(1:floor(L/2+1));
     P1(2:end-1,i) = 2*P1(2:end-1,i);
@@ -58,3 +58,4 @@ if doPlot==1
 end
     
     result=P1;
+    extra = Y;
