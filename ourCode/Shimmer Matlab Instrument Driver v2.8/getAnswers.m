@@ -6,7 +6,7 @@ function getAnswers(Scores,Measures)
 
 %Statistics for scores and measures:
 [pScoreAvg,pScoreAvgMult] = bonferonni(Scores(:,1:3))
-[pLeng,pLengMult] = bonferonni(Measures(:,1:3))
-[pSpan,pSpanMult] = bonferonni(Measures(:,4:6))
-[pFreq,pFreqMult] = bonferonni(Measures(:,7:9))
+[pLeng,pLengMult] = bonferonnni(Measures(:,1:3))
+[pSpan,pSpanMult] = bonferonnni(Measures(:,4:6))
+[pFreq,pFreqMult] = bonferonnni(Measures(:,7:9))
 [pIntense,pIntenseMult] = bonferonni(Measures(:,10:12))

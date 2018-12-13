@@ -29,15 +29,15 @@ The final performance score for each subject is presented in \tabref{tab:scores}
 \label{tab:scores}
 \end{table}
 
-A Kruskal-Wallis test has been implemented for the statistical analysis of the results, as the data comes from non-Gaussian distributed data, and the comparison is between three unmatched groups. The results from the Kruskal-Wallis test was analysed using Bonferroni correction to compensate for the comparison of three groups, and avoid false negatives or positives. The results of the statistical analysis are presented in \tabref{tab:pValues}.
+A Kruskal-Wallis test has been implemented for the statistical analysis of the scores and intensity measure, as the data comes from non-Gaussian distributed data, and the comparison is between three unmatched groups. The other measures were from a Gaussian distribution according to a Kolmogorov-Smirnov test, and a one-way ANOVA was implemented for these. The results from the statistical tests were analysed using Bonferroni correction to compensate for the comparison of three groups, and avoid false negatives or positives. The results of the statistical analysis are presented in \tabref{tab:pValues}.
 
 \begin{table}[h]
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
 		& Overall & N vs. I & N vs. M & I vs. M \\ \hline
-		Length:    & 0.329   & 0.736   & 0.295   & 0.736   \\ \hline
-		Span:      & 0.561   & 0.736   & 0.549   & 0.952   \\ \hline
-		Frequency: & 0.177   & 0.896   & 0.372   & 0.173   \\ \hline
+		Length:    & 0.243   & 0.382   & 0.249   & 0.933   \\ \hline
+		Span:      & 0.316   & 0.936   & 0.318   & 0.472   \\ \hline
+		Frequency: & 0.095   & 0.925   & 0.170   & 0.105   \\ \hline
 		Intensity: & 0.039   & 0.549   & 0.030   & 0.295   \\ \hline
 		Score:     & 0.027   & 0.372   & 0.020   & 0.372   \\ \hline
 	\end{tabular}
