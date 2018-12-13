@@ -5,15 +5,14 @@ This section covers processing and analysis of acquired data. All data processin
 \subsection{Filtering} \label{subsec:filtering}
 %Butterworth filtering of the gyroscope measurements
 %Filtering has been implemented in the form of a low pass third order Butterworth filter with a cut off frequency at 25Hz. Since measurement are 
-In order to determine a adequate filter for filtering of the FSR data the a spectral analysis have been conducted. A Fourier transform (FT) of FSR data can be seen in \figref{fig:FSR_FFTplot}, where it can be seen that frequencies 
+%In order to determine a adequate filter for filtering of the FSR data the a spectral analysis have been conducted. A Fourier transform (FT) of FSR data can be seen in \figref{fig:FSR_FFTplot}, where it can be seen that frequencies 
 
-The spectral density of gyroscope data have been analysed to investigate frequencies of interest. From the Fourier transform (FT) of gyroscope data (see \figref{fig:gyroFFTPlot}) it can be observed that frequencies over 10Hz contain very little information. To avoid possible noise and artefacts a low pass third order Butterworth filter have been implemented with a cut off frequency at 25Hz. %no
+%The spectral density of gyroscope data have been analysed to investigate frequencies of interest. From the Fourier transform (FT) of gyroscope data (see \figref{fig:gyroFFTPlot}) it can be observed that frequencies over 10Hz contain very little information. To avoid possible noise and artefacts a low pass third order Butterworth filter have been implemented with a cut off frequency at 25Hz. %no
 
+Acquired FSR data is filtered with a low pass third order Butterworth filter with cutoff at 5Hz, according to \cite{Prieto1996}. 
+However, during the experiment it was observed that subjects dragged their feet over the ground when performing the kata. This was not anticipated, and an examination of acquired data showed noise artefacts in frequencies above 1Hz, associated with dragging the feet. As the goal for this study is to investigate subjects sway of balance during movements, and not directly determining movements, the cutoff frequency was changed to 2.5Hz. A cutoff at this frequency showed good results.
 
-FSR data filtering at 5Hz according to \cite{Prieto1996}. However we examine our data and know that subjets have dragged their feet over the ground/floor during data acquisition (as one does when doing karate). This produce high frequencies which are unwanted for our data analysis, thus we lower the cutoff frequency to 2.5Hz as we only want to examine subjects' sway and not noise/artefacts produced from movements. 
-
-
-Gyroscope data have also been filtered through a third order low pass Butterworth filter with cut off frequency set at 1.25Hz, according to \cite{Alberts2015}. 
+Gyroscope data have been filtered through a third order low pass Butterworth filter with cutoff frequency set at 1.25Hz, according to \cite{Alberts2015}. 
 
 
 \begin{figure}[H]
@@ -37,7 +36,7 @@ Because the measurements from the FSRs are run on an Arduino, and the gyroscopes
 
 \subsection{Calculation of movement scores}
 
-For calculating a movement score four separate scores will be calculated; COP, length, span and frequency distribution. COP is a calculation of the estimated COP for a test subject on a plane. The length is calculated on the path of the moving COP during recording. Span is a calculation of the area in which the COP has travelled. Frequency distribution is a measure for the gyroscope frequencies measured during recordings.
+For calculating a movement score five separate scores will be calculated; COP, length, span, velocity change and movement intensity. COP is a calculation of the estimated COP for a test subject on a plane. The length is calculated on the path of the moving COP during recording. Span is a calculation of the area in which the COP has travelled. Velocity change is a measure for how often the measured angular velocity changes during recordings. Movement intensity in as measure for how fast a subject has moved during the kata performance. 
 
 \subsubsection{Calculation of Centre of Pressure}
 %method for calculation of COP 
@@ -74,27 +73,58 @@ Span_{x,y} = \frac{\left| max(COP_{x,y})-min(COP_{x,y})\right|}{10}
 \end{equation}
 
 
-\subsubsection{Calculation of frequency distribution}
-As described in \subref{subsec:filtering} on filtering, it is shown that the power spectrum of the gyroscope data provided very little information above 10Hz. Thus, the frequencies have been divided into two categories: low and high. Here, low frequencies is defined as 2/3 of the frequency spectrum from 0 to 5Hz, and are an expression for stable movements. High frequencies are defined as the last 1/3 of the frequency spectrum from 0 to 5Hz, and are an expression for less stable movements. This separation of low and high frequencies, relative to the frequency band of acquired data, is based on when the frequency distribution deviated less than 5\% of the mean for individual subject. The frequency distribution is calculated by the difference between the power at frequencies in the low and high category, divided by the total power of frequencies between 0 and 5Hz, as shown in \eqref{eq:fd}:
+\subsubsection{Calculation of velocity change}
+%As described in \subref{subsec:filtering} on filtering, it is shown that the power spectrum of the gyroscope data provided very little information above 10Hz. Thus, the frequencies have been divided into two categories: low and high. Here, low frequencies is defined as 2/3 of the frequency spectrum from 0 to 5Hz, and are an expression for stable movements. High frequencies are defined as the last 1/3 of the frequency spectrum from 0 to 5Hz, and are an expression for less stable movements. This separation of low and high frequencies, relative to the frequency band of acquired data, is based on when the frequency distribution deviated less than 5\% of the mean for individual subject. The frequency distribution is calculated by the difference between the power at frequencies in the low and high category, divided by the total power of frequencies between 0 and 5Hz, as shown in \eqref{eq:fd}:
 
-\begin{equation} \label{eq:fd}
-Distribution = \frac{LowFreq-HighFreq}{LowFreq+HighFreq}
+The calculation of velocity changes process the angular velocities as frequencies to determine the changes in angular velocities. A Fourier transform of the data shows the distribution of slow and fast changes of the angular velocity. Here, the divide between slow changes (frequencies: 0.01-0.625Hz) and fast changes (frequencies: 0.626-1.25Hz) are set at half the cutoff frequency used for filtering (1.25Hz).
+The fast changes are hypothesised to be caused by trembles at the legs done to correct and regain balance. Slow changes are hypothesised to only be caused by larger movements, such as steps or turns. Thus, the measure is an expression for how precise movements can be performed. The measure is calculated by subtracting frequencies in the low category from the high category frequencies, and dividing by to sum of all frequencies, as shown in \eqref{eq:VC}:
+%low 0.01 - 0.625
+%high 0.626 - 1.25
+
+
+\begin{equation} \label{eq:VC}
+Change = \frac{LowFreq-HighFreq}{LowFreq+HighFreq}
+\end{equation}
+
+
+\subsection{Calculation of movement intensity}
+The movement intensity measure express how fast a subject can start and stop movements. 
+
+The calculation divides the distribution of slow and fast movements, based on the measured angular velocity. The border between slow and fast is decided as the mean angular velocity measured for a full recording. This means that the faster a subject moves during the kata the higher the mean will be. This ensures that only very fast movements such as steps and turn are categorised as fast velocities, while slower movements such as those made during sways when regaining balance is categorized as slow velocities. The categorization of movements are calculated as shown in \eqref{eq:MI}, where $i$ is sample and $j$ is the channel for each of the three gyroscope channels (x, y, z). Following, the calculation for movement intensity is as shown in \eqref{eq:MI}, where $L$ is the size of the gyroscope data matrix.
+
+\begin{equation} \label{eq:category}
+M(i,j) = \left \{
+\begin{matrix}
+{mean(Gyro(j)) < Gyro(i,j) = 1}\\{mean(Gyro(j)) > Gyro(i,j) = 0}
+\end{matrix} \right.
+\end{equation}
+
+
+
+%\begin{equation} \label{eq:category}
+%M(i,j) = \{
+%\stackrel{mean(Gyro(j)) < Gyro(i,j) = 1}{mean(Gyro(j)) > Gyro(i,j) = 0}
+%\end{equation}
+%
+%mean(Gyro(j)) < Gyro(i,j) = 1
+%mean(Gyro(j)) > Gyro(i,j) = 0
+
+
+\begin{equation} \label{eq:MI}
+Intensity = \frac{M*\left| Gyro\right| }{\sum_{i=1}^{L}\left| Gyro\right| }
 \end{equation}
 
 
 \subsection{Calculation of performance score}
-Each movement score; length, span and frequency distribution is used to calculate a final performance score for each subject. 
-The performance score is calculated by dividing length by span, and multiplying by one subtracted with the frequency distribution, as seen in \eqref{eq:score}. The best performance score is produced by short lengths in relation to larger spans. The performance score is better the lower the value. 
+Each movement score; length, span and velocity change and movement intensity is used to calculate a final performance score for each subject. 
+The performance score is calculated as seen in \eqref{eq:score}. The best performance score is produced by having a larger span relative to the length, as the performance score is better the lower the value. %this is stupid yes but we wont change it 
 
 %Having a short length for a movement sequence would mean precise path directly from start to finish, while a longer length would mean that a longer path have been taken between start and finish. A great span measure is a result of greater force excessed on the FSRs, meaning that movements have been performed faster. 
 %lille lenght = præcis movement
 
 \begin{equation} \label{eq:score}
-Score = \frac{Length}{Span} * (1 - Frequency Distribution)
+Score = \frac{1-Length}{Span} * (1 - Change)*(1-Intensity)
 \end{equation}
 
-%(10/10)*(1-0,5) = 0,5
-%(10/1)*(1-0,5)   = 5
-%(1/10)*(1-0,5)   = 0,05
 
 
