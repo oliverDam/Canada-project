@@ -3,27 +3,27 @@
 \section{System test}
 This section covers the test of the system, prior to conducting the experiment for the project. 
 
-\subsection{Method of test for gyroscopes}
+\subsection{Method of Test for Gyroscopes}
 The authors assess that a test of the gyroscopes is not necessary, as the Shimmer3 devices will be calibrated using the built in function of Shimmer Sensing’s program, Consensys, to ensure the devices are working as expected.
 
 %til test af gyro/accel kan vi gøre som paul foreslog og filme personen imens de drejer rundt eller noget, hvor vi kan synkronisere film med gyro/accel målinger og se at der sker udsving på samme tidspunkt som personen drejer/bevæger sig. Det kan self ikke være med i rapporten men vi kan vise det til eksamen. 
 
 
-\subsection{Method of test for Force Sensitive Resistors}
+\subsection{Method of Test for Force Sensitive Resistors}
 The FSRs will be tested by placing a 1kg weight covering a surface area of 1$cm^{2}$ applied in the middle of both types of FSRs. This is done to test if any of the sensors are broken or deviate compared to the other FSRs. %mean result of the test.
 
 %retfærdigøre at vi brugere sensore der "kun" kan måle så lidt tryk til at måle under folk som vejer +50 kg. Sikkert noget med at simon har sat modstande i systemet som øger sensorernes måling af tryk påvirkning. 
 
-\subsection{Test  results for Force Sensitive Resistors}
+\subsection{Test  Results for Force Sensitive Resistors}
 A weight of 1kg were applied to each FSR in order from FSR channel 1 to 6. The weight were applied for approximately five seconds to each FSR in the middle of the sensor area. Results of the test of the FSRs is shown in \figref{fig:FSRTestPlot1kg}.
 
 \begin{figure}[H]
-	\includegraphics[width=.6\textwidth]{figures/FSRTestPlot1kg}
+	\includegraphics[width=.7\textwidth]{figures/FSRTestPlot1kg}
 	\caption{The result of the test of the six FSRs.}
 	\label{fig:FSRTestPlot1kg}  %<--remember LABEL!
 \end{figure}
 
-As it can be seen from the results none of the sensors are broken, however FSR number 3 (FSR\#3), located at the heel of the right foot, returns a lower resistance when applied a 1kg weight compared to the other FSRs. 
+As it can be seen from the results none of the sensors are broken, however FSR number 3 (FSR3), located at the heel of the right foot, returns a lower resistance when applied a 1kg weight compared to the other FSRs. 
 
 %Tell the truth.
 %The authors learned too late in the work period that one of the FSRs were returning resistance varying from the other FSRs. This was not anticipated and no replacement had been ordered. However, the authors hope/judge/evaluate that the FSR will not affect the data processing the calculations of Centre of Pressure (COP) too much.
@@ -32,11 +32,11 @@ As it can be seen from the results none of the sensors are broken, however FSR n
 %During continuous testing of the system during development the authors experienced damage to one of the FSRs, and are at this point in the work, unable to obtain a replacement. However, as this project is mainly to function as a proof of concept work, the authors determine that one sensor should not have too much of an effect.
 
 %tell the something-in-between
-This could prove a problem if data were to be compared between individual FSRs, however the output for each FSR sensors will be used for estimation of a point for the subjects COP, which will be used to compare COP between subjects. Thus, the FSR\#3 measurement will not have an effect as long as FSR\#3 have the same deviance for every subject. 
+This could prove a problem if data were to be compared between individual FSRs, however the output for each FSR sensors will be used for estimation of a point for the subjects COP, which will be used to compare COP between subjects. Thus, the FSR3 measurement will not have an effect as long as FSR3 have the same deviance for every subject. 
 
 
 
-\subsection{System test}
+\subsection{System Test}
 The system as a whole will be tested with a walk sequence. The sequence will involve periods of no movement, movement by walking and turning and a light jump to mark the beginning and end of the sequence. The test walk sequence is as follows:
 \vspace{-0.6cm}
 \begin{itemize}
@@ -62,10 +62,10 @@ The system as a whole will be tested with a walk sequence. The sequence will inv
 %Test walk sequence: Wait 3 sec. light jump. wait 1 sec. walk 5 steps. 180 turn. walk 5 steps. 90 turn right. wait. 90 turn right. wait. quick 180. wait quick 180. wait 1. light jump. wait 3 sec. 
 Following the system test the acquired data will be qualitatively evaluated to ensure everything works as intended. 
 
-\subsection{Test results for System test}
+\subsection{Test Results for System Test}
 %Everything was fine. maybe.
-Result of the system test as a whole were successful, despite lower readings from FSR\#3. Acquired data were plotted for each FSR channel so the recorded output could be viewed alongside a video recording of the test walk sequence. At each step FSRs were reacting and returning values consistent with what would be expected when pressure were either applied to or removed from the sensors. 
-It is concluded that, as the lower resistance returned from FSR\#3 will be consistent for all data collection, the \textit{"error"} will be present in each data set and therefore should not have any effect on comparison between subjects. 
+Result of the system test as a whole were successful, despite lower readings from FSR3. Acquired data were plotted for each FSR channel so the recorded output could be viewed alongside a video recording of the test walk sequence. At each step FSRs were reacting and returning values consistent with what would be expected when pressure were either applied to or removed from the sensors. 
+It is concluded that, as the lower resistance returned from FSR3 will be consistent for all data collection, the \textit{"error"} will be present in each data set and therefore should not have any effect on comparison between subjects. 
 
 %not necessary 
 %A problem occurred with the FSR 406 placed under the heel of the subject during the system test . When weight was applied to the sensor it would measure the highest possible force the sensor can measure, and no useful data could be collected from the sensor. It was evaluated why this happened and discovered that because the FSR 406 covers a larger area and were placed at the heel it would be affected by more force when a subject stood on it. As the distribution of pressure is higher at the heel compared to anywhere else under the foot while standing, it makes sense that the FSR 406 would be overloaded \cite{Hessert2005}. To account for this, the FSR 402 placed at the lateral side of the feet where switched with the FSR 406 at the heel. As the FSR 402 covers a smaller area they would not be overloaded as easily as the FSR 406. As a result the FSR 406 is now placed at the lateral side of the eminence of the sole, and one FSR 402 is placed at the heel. The new placement of FSR sensors can be seen in \figref{fig:soleSensorPlacement}.

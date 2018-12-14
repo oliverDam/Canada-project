@@ -1,4 +1,11 @@
 %statistical analysis
 \section{Statistical Analysis} \label{sec:statistics}
 
-A Kruskal-Wallis test has been implemented for the statistical analysis of the results, as the data comes from non-Gaussian distributed data, and the comparison is between three unmatched groups. The results from the Kruskal-Wallis test were analysed using Bonferroni correction to compensate for the comparison of three groups, and avoid false negatives or positives.
+Following data processing, acquired data will either be analysed through a one-way ANOVA or a Kruskal-Wallis test depending on if data have Gaussian, or non-Gaussian distribution respectively. To test for normal distribution data is tested with a One-sample Kolmogorov-Smirnov test. Additionally, to compare between groups Bonferroni correction is applied to avoid false negatives or positives. 
+
+
+%A Kruskal-Wallis test has been implemented for the statistical analysis of the results, as the data comes from non-Gaussian distributed data, and the comparison is between three unmatched groups. The results from the Kruskal-Wallis test were analysed using Bonferroni correction to compensate for the comparison of three groups, and avoid false negatives or positives.
+
+%one-sample KS test -> measures have Gaussian distribution, scores have non-Gaussian distribution
+%gaussian -> 1 way anova
+%non-gaussion -> kruskal-wallis flight 

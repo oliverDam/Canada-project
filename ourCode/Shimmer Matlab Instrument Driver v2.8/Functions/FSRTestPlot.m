@@ -24,8 +24,8 @@ plot(FTD(:,1),FTD(:,6))
 hold on;
 plot(FTD(:,1),FTD(:,7))
 l = legend('FSR1','FSR2','FSR3','FSR4','FSR5','FSR6');
-l.FontSize = 18;
+l.FontSize = 20;
 t = title('Test of FSR with 1kg applied force'); %or other weight
-t.FontSize = 20;
-set(gca,'FontSize',18)
+t.FontSize = 40;
+set(gca,'FontSize',25)
 end

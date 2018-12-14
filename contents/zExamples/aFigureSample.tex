@@ -23,29 +23,27 @@ This reference only represents this line since it is before the punctuation mark
 
 Here is a way to make two images appear on the side of each other. Also, if you modified an image, this is how you properly refer to its original source:
 
+%%new way to inset two pictures alongside each other. updated 13/12/2018
 \begin{figure}[H]
-    \subcaptionbox  %<--use captionbox instead if no global caption is needed
-    {               %                                \%-%-%-%-%-%-%\
-      Clockwise 4Q operation.\newline                              %\
-      \emph{Edited from image by Biezl.\cite{Biezl}}                %\
-      \label{fig:HbridgeClokwise4Q}                                  %\
-    }                                                                 %\
-    {                                                                  %\
-      \includegraphics[width=.46\textwidth]{HbridgeClockwise4Q}         %\
-    }                                                                    %\
-    \hspace{5pt}                                                          %\
-    \subcaptionbox  %<-----------------------------------------------------%\
-    {                                                                       %\
-      Counterclockwise 4Q operation.\newline                                 %\
-      \emph{Edited from image by Biezl.\cite{Biezl}}                          %\
-      \label{fig:HbridgeCounterClokwise4Q}                                     %\
-    }                                                                           %\
-    {                                                                            %\
-      \includegraphics[width=.46\textwidth]{HbridgeCounterClockwise4Q}            %|
-    }                                                                             %|
-    \caption{The 4 quadrant H-bridge configuration shown in both directions.}%<-%-/
-    \label{fig:Hbridges}
+	\hfill
+	{%
+		\begin{minipage}{0.46\linewidth}
+			\includegraphics[width=\linewidth]{figures/zExamples/filename}
+			\caption{leave blank} %leave some text there or the figures will move slightly relative to each other
+			\label{fig:Picture1}
+		\end{minipage}
+	}\hfill
+	{%
+		\begin{minipage}{0.46\linewidth}
+			\includegraphics[width=\linewidth]{figures/zExamples/filename}
+			\caption{leave black} %leave some text there or the figures will move slightly relative to each other
+			\label{fig:Picture2}
+		\end{minipage}
+	}%\hfill\strut
+	\caption{Text describing both pictures.}
 \end{figure}
+
+
 
 As seen \autoref{fig:HbridgeCounterClokwise4Q} can be referred to on its own, or you can use \autoref{fig:Hbridges} to refer to both \autoref{fig:HbridgeClokwise4Q} and \autoref{fig:HbridgeCounterClokwise4Q}.
 
