@@ -10,7 +10,7 @@ This section covers processing of acquired data. All data processing were perfor
 %The spectral density of gyroscope data have been analysed to investigate frequencies of interest. From the Fourier transform (FT) of gyroscope data (see \figref{fig:gyroFFTPlot}) it can be observed that frequencies over 10Hz contain very little information. To avoid possible noise and artefacts a low pass third order Butterworth filter have been implemented with a cut off frequency at 25Hz. %no
 
 Acquired FSR data was filtered with a third order low pass Butterworth filter with cutoff at 5Hz, according to \cite{Prieto1996}. 
-However, during the experiment it was observed that subjects dragged their feet over the ground when performing the kata. This was not anticipated, and an examination of acquired data showed noise artefacts in frequencies above 1Hz, associated with dragging the feet. As the goal for this study was to investigate subjects sway of balance during movements, and not directly determining movements, the cutoff frequency was changed to 2.5Hz. A cutoff at this frequency showed good results.
+However, during the experiment it was observed that subjects dragged their feet over the ground when performing the kata. This was not anticipated, and an examination of acquired data showed noise artefacts in frequencies above 1Hz, associated with dragging the feet. As the goal for this study was to investigate subjects sway of balance during movements, and not directly determining movements, the cutoff frequency was changed to 2.5Hz.% A cutoff at this frequency showed good results.
 
 Gyroscope data was similarly filtered through a third order low pass Butterworth filter, but with cutoff frequency set at 1.25Hz, according to \cite{Alberts2015}. 
 
